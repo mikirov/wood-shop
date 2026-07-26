@@ -48,7 +48,7 @@ export function CheckoutForm({
           </p>
         ) : null}
         <Link
-          href={`/${locale}/collection/${productSlug}`}
+          href={`/${locale}/shop/${productSlug}`}
           className="mt-8 inline-flex cursor-pointer text-xs tracking-[0.16em] text-accent uppercase hover:text-foreground"
         >
           {c.backToProduct}

@@ -35,7 +35,7 @@ export default async function CheckoutPage({ params, searchParams }: PageProps) 
   const locale = raw as Locale;
   const { product: slug } = await searchParams;
   if (!slug) {
-    redirect(`/${locale}/collection`);
+    redirect(`/${locale}/shop`);
   }
 
   const product = await getProductBySlug(slug, locale);

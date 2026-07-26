@@ -5,7 +5,8 @@ import { getSiteUrl } from "@/lib/site";
 
 const staticPaths = [
   "",
-  "/collection",
+  "/shop",
+  "/custom",
   "/about",
   "/quote",
   "/contact",
@@ -32,18 +33,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const products = locales.flatMap((locale) =>
-    CATALOG.map((product) => ({
-      url: `${siteUrl}/${locale}/collection/${product.slug}`,
-      lastModified: now,
-      alternates: {
-        languages: Object.fromEntries(
-          locales.map((alt) => [
-            alt,
-            `${siteUrl}/${alt}/collection/${product.slug}`,
-          ]),
-        ),
-      },
-    })),
+    CATALOG.map((product) => {
+      const prefix = product.category === "shop" ? "shop" : "custom";
+      return {
+        url: `${siteUrl}/${locale}/${prefix}/${product.slug}`,
+        lastModified: now,
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((alt) => [
+              alt,
+              `${siteUrl}/${alt}/${prefix}/${product.slug}`,
+            ]),
+          ),
+        },
+      };
+    }),
   );
 
   return [...pages, ...products];

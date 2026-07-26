@@ -2,9 +2,13 @@ import type { Locale } from "@/i18n/config";
 
 export type LocalizedText = Record<Locale, string>;
 
+export type ResinColor = "blue" | "black";
+
 export type CatalogProduct = {
   slug: string;
-  category: "table" | "object";
+  category: "shop" | "custom";
+  family?: "coasters" | "board" | "tray";
+  resin?: ResinColor;
   name: LocalizedText;
   tagline: LocalizedText;
   description: LocalizedText;
@@ -17,33 +21,38 @@ export type CatalogProduct = {
   sortOrder: number;
 };
 
+const readyLeadTime: LocalizedText = {
+  en: "0 days — ready to ship",
+  bg: "0 дни — готово за изпращане",
+};
+
 export const CATALOG: CatalogProduct[] = [
   {
     slug: "midnight-vein",
-    category: "table",
+    category: "custom",
     name: {
       en: "Midnight Vein Dining Table",
       bg: "Трапезна маса Midnight Vein",
     },
     tagline: {
-      en: "Walnut slabs parted by a charcoal–indigo resin river.",
-      bg: "Орехови плочи, разделени от въглено-индиго епоксидна река.",
+      en: "Example: walnut with a dark resin river. Made to your length.",
+      bg: "Пример: орех с тъмна смолна река. По ваша дължина.",
     },
     description: {
-      en: "Two live-edge walnut sides with a dark charcoal-to-indigo epoxy pour between them. The steel legs are blackened and fairly simple. Meant for a dining room that seats about eight to ten people. We make each one to your length.",
-      bg: "Две орехови страни с жив ръб и тъмна въглено-индиго епоксидна заливка по средата. Краката са от почернена стомана, без излишни детайли. За трапезария с около 8–10 места. Всяка маса се прави по ваша дължина.",
+      en: "This is an example of the kind of dining table we build. Two live-edge walnut sides with a dark charcoal-to-indigo epoxy pour. Blackened steel legs. Usually seats eight to ten. If you like this direction, send sizes and we’ll quote it.",
+      bg: "Това е пример за трапезна маса, каквато правим. Две орехови страни с тъмна въглено-индиго епоксидна заливка. Крака от почернена стомана. Обикновено за 8–10 места. Ако ви харесва тази посока, пратете размери и ще дадем оферта.",
     },
     materials: {
-      en: "European walnut, pigmented epoxy resin, blackened steel base, oil-rubbed finish",
-      bg: "Европейски орех, пигментирана епоксидна смола, основа от почернена стомана, маслено покритие",
+      en: "European walnut, pigmented epoxy, blackened steel base",
+      bg: "Европейски орех, пигментирана епоксидна смола, основа от почернена стомана",
     },
     dimensions: {
-      en: "Typical: 240–280 cm L × 100–110 cm W × 75 cm H. Custom lengths on request.",
-      bg: "Обичайно: 240–280 см Д × 100–110 см Ш × 75 см В. Индивидуални дължини по заявка.",
+      en: "Typical guide: 240–280 cm L × 100–110 cm W × 75 cm H",
+      bg: "Ориентир: 240–280 см Д × 100–110 см Ш × 75 см В",
     },
     leadTime: {
-      en: "10–14 weeks from deposit",
-      bg: "10–14 седмици след депозит",
+      en: "Usually 10–14 weeks after deposit",
+      bg: "Обикновено 10–14 седмици след депозит",
     },
     pricing: { type: "quote" },
     heroImage: "/products/midnight-vein.jpg",
@@ -52,30 +61,30 @@ export const CATALOG: CatalogProduct[] = [
   },
   {
     slug: "ember-fracture",
-    category: "table",
+    category: "custom",
     name: {
       en: "Ember Fracture Console",
       bg: "Конзола Ember Fracture",
     },
     tagline: {
-      en: "Charred oak split by a cooled-lava amber seam.",
-      bg: "Опушен дъб, разцепен от кехлибарена смола като застинала лава.",
+      en: "Example: narrow console with an amber resin line.",
+      bg: "Пример: тясна конзола с кехлибарена смолна линия.",
     },
     description: {
-      en: "A narrow console in charred oak with an amber epoxy line through the middle. Brass feet on the legs. Useful in a hallway or next to a bar — not oversized.",
-      bg: "Тясна конзола от опушен дъб с кехлибарена епоксидна линия по средата. Месингови накрайници на краката. Удобна за коридор или до бар — не е прекалено голяма.",
+      en: "A reference piece for hallway or bar consoles — charred oak with an amber epoxy seam and brass feet. Use it as a visual guide when you enquire; we’ll adjust width and length to your space.",
+      bg: "Референция за конзола в коридор или до бар — опушен дъб с кехлибарена епоксидна фуга и месингови накрайници. Ползвайте я като визуален ориентир при запитване; нагласяме ширина и дължина към пространството ви.",
     },
     materials: {
-      en: "Charred oak, amber epoxy resin, solid brass foot caps, matte oil finish",
-      bg: "Опушен дъб, кехлибарена епоксидна смола, масивни месингови накрайници, матово маслено покритие",
+      en: "Charred oak, amber epoxy, brass foot caps",
+      bg: "Опушен дъб, кехлибарена епоксидна смола, месингови накрайници",
     },
     dimensions: {
-      en: "Typical: 150 cm L × 35 cm W × 80 cm H. Custom widths available.",
-      bg: "Обичайно: 150 см Д × 35 см Ш × 80 см В. Индивидуални ширини.",
+      en: "Typical guide: 150 cm L × 35 cm W × 80 cm H",
+      bg: "Ориентир: 150 см Д × 35 см Ш × 80 см В",
     },
     leadTime: {
-      en: "8–12 weeks from deposit",
-      bg: "8–12 седмици след депозит",
+      en: "Usually 8–12 weeks after deposit",
+      bg: "Обикновено 8–12 седмици след депозит",
     },
     pricing: { type: "quote" },
     heroImage: "/products/ember-fracture.jpg",
@@ -84,30 +93,30 @@ export const CATALOG: CatalogProduct[] = [
   },
   {
     slug: "ashmoor-conference",
-    category: "table",
+    category: "custom",
     name: {
       en: "Ashmoor Conference Slab",
       bg: "Конферентна маса Ashmoor",
     },
     tagline: {
-      en: "Ash veiled in smoky grey epoxy mist and metal flecks.",
-      bg: "Ясен, обвит в опушена сива епоксидна мъгла и метални частици.",
+      en: "Example: long ash table with grey resin mist.",
+      bg: "Пример: дълга ясенова маса със сива смолна мъгла.",
     },
     description: {
-      en: "A longer ash tabletop with a translucent grey epoxy pour and a bit of metal fleck in the resin. Iron trestle base. We use this scale for meeting rooms and larger dining setups.",
-      bg: "По-дълга ясенова плоча с полупрозрачна сива епоксидна заливка и леки метални частици в смолата. Основа от желязо. Подходяща за заседателни зали и по-големи трапезарии.",
+      en: "An example of a longer meeting or dining slab — ash with a translucent grey epoxy pour and an iron trestle. Photos here are for orientation; every commission is sized to the room.",
+      bg: "Пример за по-дълга заседателна или трапезна плоча — ясен с полупрозрачна сива епоксидна заливка и желязна основа. Снимките са за ориентир; всяка поръчка се оразмерява към помещението.",
     },
     materials: {
-      en: "European ash, translucent grey epoxy with metallic flecks, matte iron trestle",
-      bg: "Европейски ясен, полупрозрачна сива епоксидна смола с метални частици, матова желязна основа",
+      en: "European ash, grey epoxy with metal flecks, iron trestle",
+      bg: "Европейски ясен, сива епоксидна смола с метални частици, желязна основа",
     },
     dimensions: {
-      en: "Typical: 300–360 cm L × 110–120 cm W × 75 cm H. Seats 10–14.",
-      bg: "Обичайно: 300–360 см Д × 110–120 см Ш × 75 см В. 10–14 места.",
+      en: "Typical guide: 300–360 cm L × 110–120 cm W × 75 cm H",
+      bg: "Ориентир: 300–360 см Д × 110–120 см Ш × 75 см В",
     },
     leadTime: {
-      en: "12–16 weeks from deposit",
-      bg: "12–16 седмици след депозит",
+      en: "Usually 12–16 weeks after deposit",
+      bg: "Обикновено 12–16 седмици след депозит",
     },
     pricing: { type: "quote" },
     heroImage: "/products/ashmoor-conference.jpg",
@@ -115,105 +124,211 @@ export const CATALOG: CatalogProduct[] = [
     sortOrder: 3,
   },
   {
-    slug: "night-tide-coasters",
-    category: "object",
+    slug: "coasters-blue",
+    category: "shop",
+    family: "coasters",
+    resin: "blue",
     name: {
-      en: "Night Tide Coasters",
-      bg: "Подложки Night Tide",
+      en: "Walnut coasters — blue resin",
+      bg: "Орехови подложки — синя смола",
     },
     tagline: {
-      en: "A set of four walnut discs with indigo resin veins.",
-      bg: "Комплект от четири орехови подложки с индиго смола.",
+      en: "Set of four. Deep blue epoxy veins.",
+      bg: "Комплект от четири. Дълбоко сини епоксидни линии.",
     },
     description: {
-      en: "Four walnut coasters with a thin indigo epoxy line in each. Soft finish on top, felt underneath so they don’t scratch the table.",
-      bg: "Четири орехови подложки с тънка индиго епоксидна линия във всяка. Меко покритие отгоре, филц отдолу, за да не драскат плота.",
+      en: "Four walnut coasters with a blue epoxy line in each. Soft finish on top, felt underneath. In stock — choose black resin if you prefer a darker look.",
+      bg: "Четири орехови подложки със синя епоксидна линия във всяка. Меко покритие отгоре, филц отдолу. Налични — има и вариант с черна смола.",
     },
     materials: {
-      en: "Walnut, pigmented epoxy resin, cork/felt base, food-safe finish",
-      bg: "Орех, пигментирана епоксидна смола, корк/филц, хранително-безопасно покритие",
+      en: "Walnut, blue epoxy resin, felt base, food-safe finish",
+      bg: "Орех, синя епоксидна смола, филцова основа, хранително-безопасно покритие",
     },
     dimensions: {
-      en: "Set of 4 · Ø 10 cm × 1 cm thick",
+      en: "Set of 4 · Ø 10 cm × 1 cm",
       bg: "Комплект от 4 · Ø 10 см × 1 см",
     },
-    leadTime: {
-      en: "2–3 weeks",
-      bg: "2–3 седмици",
-    },
+    leadTime: readyLeadTime,
     pricing: { type: "fixed", amountEur: 42 },
-    heroImage: "/products/night-tide-coasters.jpg",
-    galleryImages: ["/products/night-tide-coasters.jpg"],
-    sortOrder: 4,
+    heroImage: "/products/coasters-blue.jpg",
+    galleryImages: ["/products/coasters-blue.jpg"],
+    sortOrder: 10,
   },
   {
-    slug: "ember-grain-board",
-    category: "object",
+    slug: "coasters-black",
+    category: "shop",
+    family: "coasters",
+    resin: "black",
     name: {
-      en: "Ember Grain Cutting Board",
-      bg: "Дъска за рязане Ember Grain",
+      en: "Walnut coasters — black resin",
+      bg: "Орехови подложки — черна смола",
     },
     tagline: {
-      en: "Charred oak board fractured by an amber epoxy seam.",
-      bg: "Опушена дъбова дъска с кехлибарена епоксидна фуга.",
+      en: "Set of four. Jet-black epoxy veins.",
+      bg: "Комплект от четири. Черни епоксидни линии.",
     },
     description: {
-      en: "A cutting and serving board in charred oak with an amber epoxy seam. Food-safe oil. Heavy enough to stay put on the counter.",
-      bg: "Дъска за рязане и сервиране от опушен дъб с кехлибарена епоксидна фуга. Хранително-безопасно масло. Достатъчно тежка, за да стои стабилно на плота.",
+      en: "Same walnut coaster set with opaque black resin instead of blue. Ready to ship.",
+      bg: "Същият комплект орехови подложки с черна смола вместо синя. Готово за изпращане.",
     },
     materials: {
-      en: "Charred oak, amber epoxy resin, food-safe oil finish, brass hanging detail",
-      bg: "Опушен дъб, кехлибарена епоксидна смола, хранително-безопасно масло, месингов детайл",
+      en: "Walnut, black epoxy resin, felt base, food-safe finish",
+      bg: "Орех, черна епоксидна смола, филцова основа, хранително-безопасно покритие",
     },
     dimensions: {
-      en: "Typical: 45 × 30 × 3.5 cm",
-      bg: "Обичайно: 45 × 30 × 3.5 см",
+      en: "Set of 4 · Ø 10 cm × 1 cm",
+      bg: "Комплект от 4 · Ø 10 см × 1 см",
     },
-    leadTime: {
-      en: "3–5 weeks",
-      bg: "3–5 седмици",
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 42 },
+    heroImage: "/products/coasters-black.jpg",
+    galleryImages: ["/products/coasters-black.jpg"],
+    sortOrder: 11,
+  },
+  {
+    slug: "board-blue",
+    category: "shop",
+    family: "board",
+    resin: "blue",
+    name: {
+      en: "Cutting board — blue resin",
+      bg: "Дъска за рязане — синя смола",
     },
+    tagline: {
+      en: "Oak board with a blue epoxy seam.",
+      bg: "Дъбова дъска със синя епоксидна фуга.",
+    },
+    description: {
+      en: "Oak cutting and serving board with a blue resin seam through the middle. Food-safe oil. In stock; also available in black resin.",
+      bg: "Дъбова дъска за рязане и сервиране със синя смолна фуга по средата. Хранително-безопасно масло. Налична; има и с черна смола.",
+    },
+    materials: {
+      en: "Oak, blue epoxy resin, food-safe oil",
+      bg: "Дъб, синя епоксидна смола, хранително-безопасно масло",
+    },
+    dimensions: {
+      en: "About 45 × 30 × 3.5 cm",
+      bg: "Около 45 × 30 × 3.5 см",
+    },
+    leadTime: readyLeadTime,
     pricing: { type: "fixed", amountEur: 78 },
-    heroImage: "/products/ember-grain-board.jpg",
-    galleryImages: ["/products/ember-grain-board.jpg"],
-    sortOrder: 5,
+    heroImage: "/products/board-blue.jpg",
+    galleryImages: ["/products/board-blue.jpg"],
+    sortOrder: 12,
   },
   {
-    slug: "ash-vein-tray",
-    category: "object",
+    slug: "board-black",
+    category: "shop",
+    family: "board",
+    resin: "black",
     name: {
-      en: "Ash Vein Catch Tray",
-      bg: "Тава Ash Vein",
+      en: "Cutting board — black resin",
+      bg: "Дъска за рязане — черна смола",
     },
     tagline: {
-      en: "Shallow ash tray veiled in smoky grey resin mist.",
-      bg: "Плитка ясенова тава с опушена сива смола.",
+      en: "Oak board with a black epoxy seam.",
+      bg: "Дъбова дъска с черна епоксидна фуга.",
     },
     description: {
-      en: "A shallow ash tray for keys and small things by the door. Grey epoxy pour with a little metallic fleck — same idea as the larger Ashmoor table, just smaller.",
-      bg: "Плитка ясенова тава за ключове и дребни вещи до вратата. Сива епоксидна заливка с леки метални частици — същата идея като голямата маса Ashmoor, само в по-малък формат.",
+      en: "Same oak board shape with jet-black resin. Ready to ship via Econt.",
+      bg: "Същата дъбова форма с черна смола. Готова за изпращане с Еконт.",
     },
     materials: {
-      en: "European ash, translucent grey epoxy with metallic flecks, matte oil finish",
-      bg: "Европейски ясен, полупрозрачна сива епоксидна смола с метални частици, матово масло",
+      en: "Oak, black epoxy resin, food-safe oil",
+      bg: "Дъб, черна епоксидна смола, хранително-безопасно масло",
     },
     dimensions: {
-      en: "Typical: 28 × 18 × 3 cm",
-      bg: "Обичайно: 28 × 18 × 3 см",
+      en: "About 45 × 30 × 3.5 cm",
+      bg: "Около 45 × 30 × 3.5 см",
     },
-    leadTime: {
-      en: "2–4 weeks",
-      bg: "2–4 седмици",
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 78 },
+    heroImage: "/products/board-black.jpg",
+    galleryImages: ["/products/board-black.jpg"],
+    sortOrder: 13,
+  },
+  {
+    slug: "tray-blue",
+    category: "shop",
+    family: "tray",
+    resin: "blue",
+    name: {
+      en: "Catch tray — blue resin",
+      bg: "Тава — синя смола",
     },
+    tagline: {
+      en: "Shallow ash tray with a blue epoxy pour.",
+      bg: "Плитка ясенова тава със синя епоксидна заливка.",
+    },
+    description: {
+      en: "Small ash tray for keys and odds by the door. Blue resin pour. In stock; black resin variant available too.",
+      bg: "Малка ясенова тава за ключове до вратата. Синя смолна заливка. Налична; има и с черна смола.",
+    },
+    materials: {
+      en: "Ash, blue epoxy resin, oil finish",
+      bg: "Ясен, синя епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About 28 × 18 × 3 cm",
+      bg: "Около 28 × 18 × 3 см",
+    },
+    leadTime: readyLeadTime,
     pricing: { type: "fixed", amountEur: 64 },
-    heroImage: "/products/ash-vein-tray.jpg",
-    galleryImages: ["/products/ash-vein-tray.jpg"],
-    sortOrder: 6,
+    heroImage: "/products/tray-blue.jpg",
+    galleryImages: ["/products/tray-blue.jpg"],
+    sortOrder: 14,
+  },
+  {
+    slug: "tray-black",
+    category: "shop",
+    family: "tray",
+    resin: "black",
+    name: {
+      en: "Catch tray — black resin",
+      bg: "Тава — черна смола",
+    },
+    tagline: {
+      en: "Shallow ash tray with a black epoxy pour.",
+      bg: "Плитка ясенова тава с черна епоксидна заливка.",
+    },
+    description: {
+      en: "Same tray in ash with opaque black resin. Ready to ship.",
+      bg: "Същата тава от ясен с черна смола. Готова за изпращане.",
+    },
+    materials: {
+      en: "Ash, black epoxy resin, oil finish",
+      bg: "Ясен, черна епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About 28 × 18 × 3 cm",
+      bg: "Около 28 × 18 × 3 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 64 },
+    heroImage: "/products/tray-black.jpg",
+    galleryImages: ["/products/tray-black.jpg"],
+    sortOrder: 15,
   },
 ];
 
 export function getCatalogProduct(slug: string) {
   return CATALOG.find((product) => product.slug === slug);
+}
+
+export function getShopProducts() {
+  return CATALOG.filter((p) => p.category === "shop").sort(
+    (a, b) => a.sortOrder - b.sortOrder,
+  );
+}
+
+export function getCustomExamples() {
+  return CATALOG.filter((p) => p.category === "custom").sort(
+    (a, b) => a.sortOrder - b.sortOrder,
+  );
+}
+
+export function getFamilyVariants(family: NonNullable<CatalogProduct["family"]>) {
+  return CATALOG.filter((p) => p.family === family);
 }
 
 export function formatFixedPrice(amountEur: number, locale: Locale) {

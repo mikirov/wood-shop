@@ -4,9 +4,9 @@ const en = {
   brand: "Obsidian River",
   nav: {
     home: "Home",
-    collection: "Collection",
+    shop: "Shop",
+    custom: "Custom tables",
     atelier: "Workshop",
-    objects: "Small pieces",
     quote: "Ask for a quote",
     contact: "Contact",
   },
@@ -17,15 +17,15 @@ const en = {
   home: {
     headline: "Epoxy tables and wood pieces from our workshop in Bulgaria.",
     subhead:
-      "We build custom dining tables when you send us sizes and preferences. Coasters, boards, and trays are ready to order at the prices listed.",
-    ctaCollection: "See what we make",
-    ctaQuote: "Ask for a quote",
-    tablesEyebrow: "Tables",
-    tablesTitle: "Made to order",
-    tablesHint: "Price depends on size, wood, and base — we send a quote first.",
-    objectsEyebrow: "Smaller work",
-    objectsTitle: "Things you can order now",
-    objectsHint: "Fixed prices. We ship with Econt in Bulgaria.",
+      "Coasters, boards, and trays are in the shop with fixed prices and ready to ship. Custom tables start with an enquiry — the photos are examples to help you describe what you want.",
+    ctaCollection: "Browse the shop",
+    ctaQuote: "Ask about a custom table",
+    tablesEyebrow: "Custom work",
+    tablesTitle: "Tables made to your sizes",
+    tablesHint: "Photos are examples. Send an enquiry if you want something like these.",
+    objectsEyebrow: "Shop",
+    objectsTitle: "Ready to buy",
+    objectsHint: "Fixed prices, blue or black resin, in stock (0 days lead time). Econt delivery.",
     processEyebrow: "How it usually goes",
     processTitle: "A short look at the work",
     process: [
@@ -35,11 +35,11 @@ const en = {
       },
       {
         title: "The resin pour",
-        body: "We tint the epoxy for darker, smokier tones. Each pour settles a little differently.",
+        body: "Shop pieces come in blue or black resin. Custom tables can use other tones if you ask.",
       },
       {
-        title: "Quote or checkout",
-        body: "Tables need a conversation about size. Smaller pieces you can order and pay for delivery with Econt.",
+        title: "Buy or enquire",
+        body: "Small pieces go straight to checkout. Tables need a short enquiry so we can quote size and base.",
       },
     ],
     faqEyebrow: "Questions people ask",
@@ -51,7 +51,7 @@ const en = {
       },
       {
         q: "Can I buy the coasters and boards online?",
-        a: "Yes. Those have fixed prices. At checkout you choose Econt delivery (office or address) and we confirm by email.",
+        a: "Yes. They’re in the Shop with fixed prices, blue or black resin, and 0 days lead time. Checkout asks for Econt delivery details and we email a confirmation.",
       },
       {
         q: "Where do you ship?",
@@ -72,6 +72,31 @@ const en = {
     objectsTitle: "Smaller pieces",
     quoteBadge: "Ask for a quote",
     viewPiece: "View details",
+  },
+  shop: {
+    eyebrow: "Shop",
+    title: "Pieces you can buy now",
+    intro:
+      "Coasters, boards, and trays in blue or black resin. Lead time is 0 days — they’re ready to ship with Econt.",
+    buyNow: "Buy",
+    resinLabel: "Resin colour",
+    resinBlue: "Blue",
+    resinBlack: "Black",
+    customHint: "Looking for a full-size table instead?",
+    customLink: "See custom examples and enquire",
+  },
+  custom: {
+    eyebrow: "Custom",
+    title: "Table examples — enquire to order",
+    intro:
+      "These photos are visual guides, not stock items. If something close to what you want, send an enquiry with sizes and we’ll reply with a quote.",
+    exampleBadge: "Example / visual guide",
+    viewExample: "View example",
+    enquireCta: "Send an enquiry",
+    guideNote:
+      "This piece isn’t sitting in a warehouse. It’s an example of work we can make for you.",
+    shopHint: "Want something ready today?",
+    shopLink: "Go to the shop",
   },
   product: {
     signature: "Custom table",
@@ -227,9 +252,9 @@ const bg: typeof en = {
   brand: "Obsidian River",
   nav: {
     home: "Начало",
-    collection: "Колекция",
+    shop: "Магазин",
+    custom: "Поръчкови маси",
     atelier: "Работилница",
-    objects: "Малки изделия",
     quote: "Запитване",
     contact: "Контакти",
   },
@@ -240,15 +265,15 @@ const bg: typeof en = {
   home: {
     headline: "Епоксидни маси и дървени изделия от нашата работилница в България.",
     subhead:
-      "Правим поръчкови трапезни маси, когато ни пишете за размери и предпочитания. Подложките, дъските и тавите се поръчват директно на обявените цени.",
-    ctaCollection: "Виж какво правим",
-    ctaQuote: "Изпрати запитване",
-    tablesEyebrow: "Маси",
-    tablesTitle: "По поръчка",
-    tablesHint: "Цената зависи от размер, дърво и основа — първо изпращаме оферта.",
-    objectsEyebrow: "По-малки изделия",
-    objectsTitle: "Може да поръчате сега",
-    objectsHint: "Фиксирани цени. Доставка с Еконт в България.",
+      "Подложките, дъските и тавите са в магазина с фиксирани цени и готови за изпращане. Поръчковите маси започват със запитване — снимките са примери, за да опишете какво искате.",
+    ctaCollection: "Към магазина",
+    ctaQuote: "Запитване за поръчкова маса",
+    tablesEyebrow: "Поръчкова работа",
+    tablesTitle: "Маси по ваши размери",
+    tablesHint: "Снимките са примери. Пратете запитване, ако искате нещо подобно.",
+    objectsEyebrow: "Магазин",
+    objectsTitle: "Готови за покупка",
+    objectsHint: "Фиксирани цени, синя или черна смола, налично (0 дни срок). Доставка с Еконт.",
     processEyebrow: "Как обикновено става",
     processTitle: "Накратко за работата",
     process: [
@@ -258,11 +283,11 @@ const bg: typeof en = {
       },
       {
         title: "Заливката със смола",
-        body: "Оцветяваме епоксида в по-тъмни, опушени тонове. Всяка заливка изглежда малко по-различно.",
+        body: "В магазина изделията са със синя или черна смола. При поръчкови маси можем да говорим и за други тонове.",
       },
       {
-        title: "Оферта или поръчка",
-        body: "За масите говорим за размера. По-малките изделия се поръчват с доставка чрез Еконт.",
+        title: "Купи или попитай",
+        body: "Малките изделия отиват директно към поръчка. За масите е нужно кратко запитване, за да оферираме размер и основа.",
       },
     ],
     faqEyebrow: "Често задавани въпроси",
@@ -274,7 +299,7 @@ const bg: typeof en = {
       },
       {
         q: "Мога ли да купя подложките и дъските онлайн?",
-        a: "Да. Те имат фиксирани цени. При поръчка избирате доставка с Еконт (офи офис или до адрес) и получавате потвърждение по имейл.",
+        a: "Да. Те са в Магазина с фиксирани цени, синя или черна смола и срок 0 дни. При поръчка избирате доставка с Еконт и получавате потвърждение по имейл.",
       },
       {
         q: "Къде доставяте?",
@@ -295,6 +320,31 @@ const bg: typeof en = {
     objectsTitle: "По-малки изделия",
     quoteBadge: "Запитване за цена",
     viewPiece: "Виж подробности",
+  },
+  shop: {
+    eyebrow: "Магазин",
+    title: "Изделия, които можете да купите сега",
+    intro:
+      "Подложки, дъски и тави в синя или черна смола. Срок 0 дни — готови са за изпращане с Еконт.",
+    buyNow: "Купи",
+    resinLabel: "Цвят на смолата",
+    resinBlue: "Синя",
+    resinBlack: "Черна",
+    customHint: "Търсите голяма маса?",
+    customLink: "Вижте примери и изпратете запитване",
+  },
+  custom: {
+    eyebrow: "Поръчка",
+    title: "Примери за маси — запитване за изработка",
+    intro:
+      "Снимките са визуални ориентири, не налични бройки. Ако нещо е близо до това, което искате, пратете запитване с размери и ще върнем оферта.",
+    exampleBadge: "Пример / визуален ориентир",
+    viewExample: "Виж примера",
+    enquireCta: "Изпрати запитване",
+    guideNote:
+      "Това изделие не стои на склад. То е пример за работа, която можем да направим за вас.",
+    shopHint: "Искате нещо готово днес?",
+    shopLink: "Към магазина",
   },
   product: {
     signature: "Поръчкова маса",

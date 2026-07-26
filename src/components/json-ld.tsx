@@ -38,8 +38,10 @@ export function productJsonLd(input: {
   image: string;
   slug: string;
   priceEur?: number;
+  pathPrefix?: "shop" | "custom" | "collection";
 }) {
   const siteUrl = getSiteUrl();
+  const prefix = input.pathPrefix ?? "shop";
   const base = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -47,7 +49,7 @@ export function productJsonLd(input: {
     description: input.description,
     image: [`${siteUrl}${input.image}`],
     brand: { "@type": "Brand", name: "Obsidian River" },
-    url: `${siteUrl}/${input.locale}/collection/${input.slug}`,
+    url: `${siteUrl}/${input.locale}/${prefix}/${input.slug}`,
   };
 
   if (input.priceEur != null) {

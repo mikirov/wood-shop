@@ -10,7 +10,7 @@ export default function NotFound() {
       <h1 className="mt-4 font-serif text-5xl text-foreground">{d.title}</h1>
       <p className="mt-4 max-w-md text-sm text-muted">{d.body}</p>
       <Link
-        href={`/${defaultLocale}/collection`}
+        href={`/${defaultLocale}/shop`}
         className="mt-10 cursor-pointer border border-accent px-7 py-3 text-xs tracking-[0.2em] text-accent uppercase hover:bg-accent hover:text-background"
       >
         {d.cta}

@@ -15,10 +15,10 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
   const pathWithoutLocale = pathname.replace(/^\/(en|bg)/, "") || "";
 
   const links = [
-    { href: `/${locale}/collection`, label: dictionary.nav.collection },
+    { href: `/${locale}/shop`, label: dictionary.nav.shop },
+    { href: `/${locale}/custom`, label: dictionary.nav.custom },
     { href: `/${locale}/about`, label: dictionary.nav.atelier },
     { href: `/${locale}/contact`, label: dictionary.nav.contact },
-    { href: `/${locale}/quote`, label: dictionary.nav.quote },
   ];
 
   return (
