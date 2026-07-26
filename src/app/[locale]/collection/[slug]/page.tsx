@@ -101,10 +101,14 @@ export default async function ProductPage({ params }: PageProps) {
             {product.description}
           </p>
           <Link
-            href={`/${locale}/quote?product=${product.slug}`}
+            href={
+              isFixed
+                ? `/${locale}/checkout?product=${product.slug}`
+                : `/${locale}/quote?product=${product.slug}`
+            }
             className="mt-10 inline-flex cursor-pointer border border-accent bg-accent px-7 py-3 text-xs tracking-[0.2em] text-background uppercase hover:bg-accent-strong hover:border-accent-strong"
           >
-            {p.quoteCta}
+            {isFixed ? p.buyCta : p.quoteCta}
           </Link>
         </div>
 

@@ -30,8 +30,8 @@ export const CATALOG: CatalogProduct[] = [
       bg: "Орехови плочи, разделени от въглено-индиго епоксидна река.",
     },
     description: {
-      en: "Two live-edge walnut flanks frame a deep charcoal-to-indigo epoxy pour, laced with faint smoke swirls that catch candlelight. Blackened steel legs taper to a quiet point. Built for formal dining — eight to ten seats — and rooms that prefer shadow over glare.",
-      bg: "Две орехови крила с жив ръб обрамчват дълбока въглено-индиго епоксидна заливка с леки димни вихри. Крака от почернена стомана. За трапезария с 8–10 места.",
+      en: "Two live-edge walnut sides with a dark charcoal-to-indigo epoxy pour between them. The steel legs are blackened and fairly simple. Meant for a dining room that seats about eight to ten people. We make each one to your length.",
+      bg: "Две орехови страни с жив ръб и тъмна въглено-индиго епоксидна заливка по средата. Краката са от почернена стомана, без излишни детайли. За трапезария с около 8–10 места. Всяка маса се прави по ваша дължина.",
     },
     materials: {
       en: "European walnut, pigmented epoxy resin, blackened steel base, oil-rubbed finish",
@@ -62,8 +62,8 @@ export const CATALOG: CatalogProduct[] = [
       bg: "Опушен дъб, разцепен от кехлибарена смола като застинала лава.",
     },
     description: {
-      en: "A narrow entry console in charred oak, fractured by an amber–ember resin seam that reads like lava sealed under glass. Brass foot caps warm the silhouette. Suited to hallways, bars, and quiet thresholds.",
-      bg: "Тясна конзола от опушен дъб с кехлибарено-жарена смола. Месингови накрайници. За коридор, бар или праг.",
+      en: "A narrow console in charred oak with an amber epoxy line through the middle. Brass feet on the legs. Useful in a hallway or next to a bar — not oversized.",
+      bg: "Тясна конзола от опушен дъб с кехлибарена епоксидна линия по средата. Месингови накрайници на краката. Удобна за коридор или до бар — не е прекалено голяма.",
     },
     materials: {
       en: "Charred oak, amber epoxy resin, solid brass foot caps, matte oil finish",
@@ -94,8 +94,8 @@ export const CATALOG: CatalogProduct[] = [
       bg: "Ясен, обвит в опушена сива епоксидна мъгла и метални частици.",
     },
     description: {
-      en: "A wide ash conference slab washed with a translucent grey epoxy mist and subtle metallic flecks. Matte iron trestle base keeps the weight grounded. Boardroom and library scale — made for long conversations.",
-      bg: "Широка ясенова плоча с полупрозрачна сива епоксидна мъгла и метални частици. Матова желязна основа. За заседателна зала или библиотека.",
+      en: "A longer ash tabletop with a translucent grey epoxy pour and a bit of metal fleck in the resin. Iron trestle base. We use this scale for meeting rooms and larger dining setups.",
+      bg: "По-дълга ясенова плоча с полупрозрачна сива епоксидна заливка и леки метални частици в смолата. Основа от желязо. Подходяща за заседателни зали и по-големи трапезарии.",
     },
     materials: {
       en: "European ash, translucent grey epoxy with metallic flecks, matte iron trestle",
@@ -126,8 +126,8 @@ export const CATALOG: CatalogProduct[] = [
       bg: "Комплект от четири орехови подложки с индиго смола.",
     },
     description: {
-      en: "Four hand-finished walnut coasters, each with a charcoal–indigo epoxy vein under a soft gloss. Felted undersides protect stone and wood.",
-      bg: "Четири ръчно завършени орехови подложки с въглено-индиго епоксидна жилка. Филцова основа предпазва плотовете.",
+      en: "Four walnut coasters with a thin indigo epoxy line in each. Soft finish on top, felt underneath so they don’t scratch the table.",
+      bg: "Четири орехови подложки с тънка индиго епоксидна линия във всяка. Меко покритие отгоре, филц отдолу, за да не драскат плота.",
     },
     materials: {
       en: "Walnut, pigmented epoxy resin, cork/felt base, food-safe finish",
@@ -158,8 +158,8 @@ export const CATALOG: CatalogProduct[] = [
       bg: "Опушена дъбова дъска с кехлибарена епоксидна фуга.",
     },
     description: {
-      en: "A substantial cutting and serving board in charred oak, split by a cooled-lava amber resin line. Built to live on the counter.",
-      bg: "Солидна дъска за рязане и сервиране от опушен дъб с кехлибарена смола. За да живее на плота — не в чекмеджето.",
+      en: "A cutting and serving board in charred oak with an amber epoxy seam. Food-safe oil. Heavy enough to stay put on the counter.",
+      bg: "Дъска за рязане и сервиране от опушен дъб с кехлибарена епоксидна фуга. Хранително-безопасно масло. Достатъчно тежка, за да стои стабилно на плота.",
     },
     materials: {
       en: "Charred oak, amber epoxy resin, food-safe oil finish, brass hanging detail",
@@ -190,8 +190,8 @@ export const CATALOG: CatalogProduct[] = [
       bg: "Плитка ясенова тава с опушена сива смола.",
     },
     description: {
-      en: "A shallow catch-all for keys, cufflinks, and evening clutter. Pale ash with translucent grey epoxy mist and faint metallic flecks.",
-      bg: "Плитка тава за ключове и дребни вещи. Светъл ясен с полупрозрачна сива епоксидна мъгла и метални частици.",
+      en: "A shallow ash tray for keys and small things by the door. Grey epoxy pour with a little metallic fleck — same idea as the larger Ashmoor table, just smaller.",
+      bg: "Плитка ясенова тава за ключове и дребни вещи до вратата. Сива епоксидна заливка с леки метални частици — същата идея като голямата маса Ashmoor, само в по-малък формат.",
     },
     materials: {
       en: "European ash, translucent grey epoxy with metallic flecks, matte oil finish",

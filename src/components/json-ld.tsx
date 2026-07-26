@@ -68,7 +68,7 @@ export function productJsonLd(input: {
       "@type": "Offer",
       priceCurrency: "EUR",
       availability: "https://schema.org/PreOrder",
-      description: "Quote on request",
+      description: "Price on request",
     },
   };
 }
