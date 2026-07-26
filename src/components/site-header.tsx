@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -26,9 +27,19 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-6 md:px-10">
         <Link
           href={`/${locale}`}
-          className="font-serif text-lg tracking-[0.18em] text-foreground uppercase md:text-2xl"
+          className="flex items-center gap-3 text-foreground"
         >
-          {dictionary.brand}
+          <Image
+            src="/brand/mark.svg"
+            alt=""
+            width={36}
+            height={36}
+            className="h-9 w-9"
+            priority
+          />
+          <span className="font-serif text-lg tracking-[0.18em] uppercase md:text-2xl">
+            {dictionary.brand}
+          </span>
         </Link>
         <nav className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 md:gap-7">
           {links.map((link) => (

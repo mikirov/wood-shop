@@ -7,7 +7,7 @@ export type ResinColor = "blue" | "black";
 export type CatalogProduct = {
   slug: string;
   category: "shop" | "custom";
-  family?: "coasters" | "board" | "tray";
+  family?: "coasters" | "board" | "tray" | "candle-holder" | "ashtray";
   resin?: ResinColor;
   name: LocalizedText;
   tagline: LocalizedText;
@@ -308,6 +308,130 @@ export const CATALOG: CatalogProduct[] = [
     heroImage: "/products/tray-black.jpg",
     galleryImages: ["/products/tray-black.jpg"],
     sortOrder: 15,
+  },
+  {
+    slug: "candle-holder-blue",
+    category: "shop",
+    family: "candle-holder",
+    resin: "blue",
+    name: {
+      en: "Candle holder — blue resin",
+      bg: "Свещник — синя смола",
+    },
+    tagline: {
+      en: "Turned cylinder with a blue resin ring.",
+      bg: "Стругован цилиндър със син смолен пръстен.",
+    },
+    description: {
+      en: "A short walnut cylinder with a centered candle recess and a blue epoxy ring turned into a groove. Simple lathe form — ready to ship; also in black resin.",
+      bg: "Къс орехов цилиндър с гнездо за свещ и син епоксиден пръстен в стругована бразда. Проста форма за струг — готово за изпращане; има и с черна смола.",
+    },
+    materials: {
+      en: "Walnut, blue epoxy resin, oil finish",
+      bg: "Орех, синя епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About Ø 8 cm × 8 cm H · candle recess Ø 2.2 cm",
+      bg: "Около Ø 8 см × 8 см В · гнездо Ø 2.2 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 48 },
+    heroImage: "/products/candle-holder-blue.jpg",
+    galleryImages: ["/products/candle-holder-blue.jpg"],
+    sortOrder: 16,
+  },
+  {
+    slug: "candle-holder-black",
+    category: "shop",
+    family: "candle-holder",
+    resin: "black",
+    name: {
+      en: "Candle holder — black resin",
+      bg: "Свещник — черна смола",
+    },
+    tagline: {
+      en: "Turned cylinder with a black resin ring.",
+      bg: "Стругован цилиндър с черен смолен пръстен.",
+    },
+    description: {
+      en: "Same machinable candle holder with opaque black resin. Ready to ship via Econt.",
+      bg: "Същият свещник с черна смола. Готов за изпращане с Еконт.",
+    },
+    materials: {
+      en: "Walnut, black epoxy resin, oil finish",
+      bg: "Орех, черна епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About Ø 8 cm × 8 cm H · candle recess Ø 2.2 cm",
+      bg: "Около Ø 8 см × 8 см В · гнездо Ø 2.2 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 48 },
+    heroImage: "/products/candle-holder-black.jpg",
+    galleryImages: ["/products/candle-holder-black.jpg"],
+    sortOrder: 17,
+  },
+  {
+    slug: "ashtray-blue",
+    category: "shop",
+    family: "ashtray",
+    resin: "blue",
+    name: {
+      en: "Ashtray — blue resin",
+      bg: "Пепелник — синя смола",
+    },
+    tagline: {
+      en: "Lathe dish with a blue resin well.",
+      bg: "Стругована чиния със синя смолна падина.",
+    },
+    description: {
+      en: "Round ash dish with a shallow bowl, one rest notch, and a blue epoxy pour in the center. Easy CNC/lathe profile. In stock; black resin available too.",
+      bg: "Кръгъл пепелник с плитка падина, едно гнездо за цигара и синя епоксидна заливка в средата. Лесен за CNC/струг профил. Наличен; има и с черна смола.",
+    },
+    materials: {
+      en: "Ash, blue epoxy resin, oil finish",
+      bg: "Ясен, синя епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About Ø 12 cm × 2.5 cm",
+      bg: "Около Ø 12 см × 2.5 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 54 },
+    heroImage: "/products/ashtray-blue.jpg",
+    galleryImages: ["/products/ashtray-blue.jpg"],
+    sortOrder: 18,
+  },
+  {
+    slug: "ashtray-black",
+    category: "shop",
+    family: "ashtray",
+    resin: "black",
+    name: {
+      en: "Ashtray — black resin",
+      bg: "Пепелник — черна смола",
+    },
+    tagline: {
+      en: "Lathe dish with a black resin well.",
+      bg: "Стругована чиния с черна смолна падина.",
+    },
+    description: {
+      en: "Same ashtray form with charcoal-black resin. Ready to ship.",
+      bg: "Същата форма с въглено-черна смола. Готов за изпращане.",
+    },
+    materials: {
+      en: "Ash, black epoxy resin, oil finish",
+      bg: "Ясен, черна епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About Ø 12 cm × 2.5 cm",
+      bg: "Около Ø 12 см × 2.5 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 54 },
+    heroImage: "/products/ashtray-black.jpg",
+    galleryImages: ["/products/ashtray-black.jpg"],
+    sortOrder: 19,
   },
 ];
 

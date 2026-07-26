@@ -30,6 +30,10 @@ export const metadata: Metadata = {
   },
   description:
     "Luxury epoxy river tables by quote and handmade atelier objects with fixed EU prices.",
+  icons: {
+    icon: "/brand/mark.svg",
+    apple: "/brand/logo.png",
+  },
 };
 
 export default function RootLayout({

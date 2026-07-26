@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
@@ -26,9 +27,18 @@ export function SiteFooter({ locale, dictionary }: SiteFooterProps) {
     <footer className="mt-auto border-t border-border bg-surface">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4 md:px-10">
         <div className="md:col-span-1">
-          <p className="font-serif text-2xl tracking-[0.14em] text-foreground uppercase">
-            {dictionary.brand}
-          </p>
+          <Link href={`/${locale}`} className="inline-flex items-center gap-3">
+            <Image
+              src="/brand/mark.svg"
+              alt=""
+              width={40}
+              height={40}
+              className="h-10 w-10"
+            />
+            <span className="font-serif text-2xl tracking-[0.14em] text-foreground uppercase">
+              {dictionary.brand}
+            </span>
+          </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
             {dictionary.footer.tagline}
           </p>
