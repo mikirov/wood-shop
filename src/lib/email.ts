@@ -1,4 +1,4 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 type OrderEmailInput = {
   orderId: string;
@@ -71,29 +71,58 @@ ${input.notes ? `\nNotes: ${input.notes}` : ""}
   };
 }
 
+function getSmtpConfig() {
+  const host = process.env.SMTP_HOST?.trim();
+  const user = process.env.SMTP_USER?.trim();
+  const pass = process.env.SMTP_PASS?.trim();
+  const port = Number(process.env.SMTP_PORT ?? "465");
+
+  if (!host || !user || !pass || !Number.isFinite(port)) {
+    return null;
+  }
+
+  const secure =
+    process.env.SMTP_SECURE?.trim().toLowerCase() === "true" || port === 465;
+
+  return { host, port, user, pass, secure };
+}
+
 export async function sendOrderEmails(input: OrderEmailInput) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.ORDER_FROM_EMAIL ?? "Obsidian River <onboarding@resend.dev>";
-  const notify = process.env.ORDER_NOTIFY_EMAIL ?? "atelier@obsidianriver.eu";
+  const smtp = getSmtpConfig();
+  const from =
+    process.env.ORDER_FROM_EMAIL?.trim() ||
+    (smtp ? `Obsidian River <${smtp.user}>` : "Obsidian River <noreply@localhost>");
+  const notify =
+    process.env.ORDER_NOTIFY_EMAIL?.trim() || "atelier@obsidianriver.eu";
   const bodies = buildBodies(input);
 
-  if (!apiKey) {
-    console.warn("RESEND_API_KEY missing — order saved, emails skipped.");
+  if (!smtp) {
+    console.warn(
+      "SMTP credentials missing — order saved, emails skipped. Set SMTP_HOST, SMTP_USER, SMTP_PASS.",
+    );
     console.info(bodies.customerText);
     console.info(bodies.atelierText);
     return { sent: false as const };
   }
 
-  const resend = new Resend(apiKey);
+  const transporter = nodemailer.createTransport({
+    host: smtp.host,
+    port: smtp.port,
+    secure: smtp.secure,
+    auth: {
+      user: smtp.user,
+      pass: smtp.pass,
+    },
+  });
 
-  await resend.emails.send({
+  await transporter.sendMail({
     from,
     to: input.customerEmail,
     subject: bodies.customerSubject,
     text: bodies.customerText,
   });
 
-  await resend.emails.send({
+  await transporter.sendMail({
     from,
     to: notify,
     subject: bodies.atelierSubject,
