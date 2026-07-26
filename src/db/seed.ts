@@ -1,8 +1,11 @@
-import "dotenv/config";
+import { config } from "dotenv";
 import { getDb } from "./index";
 import { products } from "./schema";
 import { CATALOG } from "../lib/catalog";
 import { eq } from "drizzle-orm";
+
+config({ path: ".env.local" });
+config();
 
 async function seed() {
   const db = getDb();

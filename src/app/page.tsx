@@ -5,6 +5,8 @@ import { listProducts } from "@/lib/products";
 export default async function HomePage() {
   const products = await listProducts();
   const featured = products[0];
+  const tables = products.filter((product) => product.sortOrder <= 3);
+  const smallPieces = products.filter((product) => product.sortOrder > 3);
 
   return (
     <>
@@ -52,7 +54,7 @@ export default async function HomePage() {
         <div className="flex items-end justify-between gap-6 border-b border-border pb-6">
           <div>
             <p className="text-xs tracking-[0.2em] text-accent uppercase">
-              Signature pieces
+              Signature tables
             </p>
             <h2 className="mt-3 font-serif text-4xl text-foreground md:text-5xl">
               The collection
@@ -67,7 +69,7 @@ export default async function HomePage() {
         </div>
 
         <div className="mt-12 grid gap-10 md:grid-cols-3">
-          {products.map((product) => (
+          {tables.map((product) => (
             <Link
               key={product.slug}
               href={`/collection/${product.slug}`}
@@ -87,10 +89,56 @@ export default async function HomePage() {
                     {product.name}
                   </p>
                   <p className="mt-2 text-sm text-muted">{product.tagline}</p>
+                  <p className="mt-3 text-xs tracking-[0.12em] text-accent uppercase">
+                    {product.priceFrom}
+                  </p>
                 </div>
               </div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="border-t border-border bg-surface/40">
+        <div className="mx-auto max-w-7xl px-6 py-24 md:px-10">
+          <p className="text-xs tracking-[0.2em] text-accent uppercase">
+            Atelier objects
+          </p>
+          <h2 className="mt-3 font-serif text-4xl text-foreground md:text-5xl">
+            Smaller pieces
+          </h2>
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted">
+            Coasters, boards, and trays — the same smoke-and-resin language, scaled for everyday ritual.
+          </p>
+          <div className="mt-12 grid gap-10 md:grid-cols-3">
+            {smallPieces.map((product) => (
+              <Link
+                key={product.slug}
+                href={`/collection/${product.slug}`}
+                className="group cursor-pointer"
+              >
+                <div className="relative aspect-square overflow-hidden bg-surface">
+                  <Image
+                    src={product.heroImage}
+                    alt={product.name}
+                    fill
+                    className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <p className="font-serif text-2xl text-foreground">
+                      {product.name}
+                    </p>
+                    <p className="mt-2 text-sm text-muted">{product.tagline}</p>
+                    <p className="mt-3 text-xs tracking-[0.12em] text-accent uppercase">
+                      {product.priceFrom}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </>
