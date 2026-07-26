@@ -17,15 +17,18 @@ async function seed() {
       .where(eq(products.slug, item.slug))
       .limit(1);
 
+    const priceFrom =
+      item.pricing.type === "fixed" ? `€${item.pricing.amountEur}` : null;
+
     const payload = {
       slug: item.slug,
-      name: item.name,
-      tagline: item.tagline,
-      description: item.description,
-      materials: item.materials,
-      dimensions: item.dimensions,
-      leadTime: item.leadTime,
-      priceFrom: item.priceFrom,
+      name: item.name.en,
+      tagline: item.tagline.en,
+      description: item.description.en,
+      materials: item.materials.en,
+      dimensions: item.dimensions.en,
+      leadTime: item.leadTime.en,
+      priceFrom,
       heroImage: item.heroImage,
       galleryImages: JSON.stringify(item.galleryImages),
       sortOrder: item.sortOrder,

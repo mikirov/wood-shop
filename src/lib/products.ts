@@ -1,78 +1,71 @@
-import { asc, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { getDb, hasDatabaseUrl } from "@/db";
-import { products, type Product } from "@/db/schema";
-import { CATALOG, getCatalogProduct, type CatalogProduct } from "@/lib/catalog";
+import { products } from "@/db/schema";
+import {
+  CATALOG,
+  getCatalogProduct,
+  localizeProduct,
+  type CatalogProduct,
+} from "@/lib/catalog";
+import type { Locale } from "@/i18n/config";
 
-export type StoreProduct = CatalogProduct & { id?: string };
+export type StoreProduct = ReturnType<typeof localizeProduct> & {
+  id?: string;
+};
 
-function fromDbRow(row: Product): StoreProduct {
-  let galleryImages: string[] = [];
-  try {
-    galleryImages = JSON.parse(row.galleryImages) as string[];
-  } catch {
-    galleryImages = [row.heroImage];
-  }
-
-  return {
-    id: row.id,
-    slug: row.slug,
-    name: row.name,
-    tagline: row.tagline,
-    description: row.description,
-    materials: row.materials,
-    dimensions: row.dimensions,
-    leadTime: row.leadTime,
-    priceFrom: row.priceFrom ?? "",
-    heroImage: row.heroImage,
-    galleryImages,
-    sortOrder: row.sortOrder,
-  };
-}
-
-export async function listProducts(): Promise<StoreProduct[]> {
+async function attachIds(
+  items: CatalogProduct[],
+): Promise<Array<CatalogProduct & { id?: string }>> {
   if (!hasDatabaseUrl()) {
-    return [...CATALOG].sort((a, b) => a.sortOrder - b.sortOrder);
+    return items;
   }
 
   try {
     const db = getDb();
-    const rows = await db
-      .select()
-      .from(products)
-      .where(eq(products.active, true))
-      .orderBy(asc(products.sortOrder));
-
-    if (rows.length === 0) {
-      return [...CATALOG].sort((a, b) => a.sortOrder - b.sortOrder);
-    }
-
-    return rows.map(fromDbRow);
+    const rows = await db.select().from(products);
+    const bySlug = new Map(rows.map((row) => [row.slug, row.id]));
+    return items.map((item) => ({
+      ...item,
+      id: bySlug.get(item.slug),
+    }));
   } catch {
-    return [...CATALOG].sort((a, b) => a.sortOrder - b.sortOrder);
+    return items;
   }
+}
+
+export async function listProducts(locale: Locale): Promise<StoreProduct[]> {
+  const withIds = await attachIds(
+    [...CATALOG].sort((a, b) => a.sortOrder - b.sortOrder),
+  );
+  return withIds.map((item) => ({
+    ...localizeProduct(item, locale),
+    id: item.id,
+  }));
 }
 
 export async function getProductBySlug(
   slug: string,
+  locale: Locale,
 ): Promise<StoreProduct | null> {
-  if (!hasDatabaseUrl()) {
-    return getCatalogProduct(slug) ?? null;
+  const item = getCatalogProduct(slug);
+  if (!item) {
+    return null;
   }
 
-  try {
-    const db = getDb();
-    const rows = await db
-      .select()
-      .from(products)
-      .where(eq(products.slug, slug))
-      .limit(1);
-
-    if (rows[0]) {
-      return fromDbRow(rows[0]);
+  let id: string | undefined;
+  if (hasDatabaseUrl()) {
+    try {
+      const db = getDb();
+      const rows = await db
+        .select({ id: products.id })
+        .from(products)
+        .where(eq(products.slug, slug))
+        .limit(1);
+      id = rows[0]?.id;
+    } catch {
+      id = undefined;
     }
-  } catch {
-    // fall through to catalog
   }
 
-  return getCatalogProduct(slug) ?? null;
+  return { ...localizeProduct(item, locale), id };
 }

@@ -1,31 +1,72 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import type { Dictionary } from "@/i18n/dictionaries";
+import type { Locale } from "@/i18n/config";
 
-const links = [
-  { href: "/collection", label: "Collection" },
-  { href: "/about", label: "Atelier" },
-  { href: "/quote", label: "Request a Quote" },
-];
+type SiteHeaderProps = {
+  locale: Locale;
+  dictionary: Dictionary;
+};
 
-export function SiteHeader() {
+export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
+  const pathname = usePathname();
+  const pathWithoutLocale = pathname.replace(/^\/(en|bg)/, "") || "";
+
+  const links = [
+    { href: `/${locale}/collection`, label: dictionary.nav.collection },
+    { href: `/${locale}/about`, label: dictionary.nav.atelier },
+    { href: `/${locale}/contact`, label: dictionary.nav.contact },
+    { href: `/${locale}/quote`, label: dictionary.nav.quote },
+  ];
+
   return (
     <header className="absolute inset-x-0 top-0 z-40">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-6 md:px-10">
         <Link
-          href="/"
+          href={`/${locale}`}
           className="font-serif text-lg tracking-[0.18em] text-foreground uppercase md:text-2xl"
         >
-          Obsidian River
+          {dictionary.brand}
         </Link>
-        <nav className="flex flex-wrap items-center justify-end gap-x-5 gap-y-2 md:gap-8">
+        <nav className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 md:gap-7">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="cursor-pointer text-[0.65rem] tracking-[0.16em] text-muted uppercase hover:text-accent md:text-xs md:tracking-[0.18em]"
+              className="cursor-pointer text-[0.65rem] tracking-[0.14em] text-muted uppercase hover:text-accent md:text-xs md:tracking-[0.18em]"
             >
               {link.label}
             </Link>
           ))}
+          <div
+            className="flex items-center border border-border/80 text-[0.65rem] tracking-[0.14em]"
+            aria-label="Language"
+          >
+            <Link
+              href={`/en${pathWithoutLocale}`}
+              className={`cursor-pointer px-2.5 py-1.5 uppercase ${
+                locale === "en"
+                  ? "bg-accent text-background"
+                  : "text-muted hover:text-accent"
+              }`}
+              hrefLang="en"
+            >
+              {dictionary.header.langEn}
+            </Link>
+            <Link
+              href={`/bg${pathWithoutLocale}`}
+              className={`cursor-pointer px-2.5 py-1.5 uppercase ${
+                locale === "bg"
+                  ? "bg-accent text-background"
+                  : "text-muted hover:text-accent"
+              }`}
+              hrefLang="bg"
+            >
+              {dictionary.header.langBg}
+            </Link>
+          </div>
         </nav>
       </div>
     </header>

@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant, Montserrat } from "next/font/google";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
+import { Cormorant, Montserrat, Noto_Serif } from "next/font/google";
 import "./globals.css";
 
 const cormorant = Cormorant({
@@ -10,19 +8,28 @@ const cormorant = Cormorant({
   weight: ["400", "500", "600", "700"],
 });
 
+const notoSerif = Noto_Serif({
+  variable: "--font-noto-serif",
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
+});
+
 const montserrat = Montserrat({
   variable: "--font-montserrat",
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
   weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://wood-shop-ten.vercel.app",
+  ),
   title: {
-    default: "Obsidian River — Epoxy Atelier",
-    template: "%s · Obsidian River",
+    default: "Obsidian River",
+    template: "%s",
   },
   description:
-    "Luxury epoxy and hardwood tables with a smoky old-school atelier finish. Request a custom quote.",
+    "Luxury epoxy river tables by quote and handmade atelier objects with fixed EU prices.",
 };
 
 export default function RootLayout({
@@ -33,14 +40,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${montserrat.variable} h-full`}
+      className={`${cormorant.variable} ${notoSerif.variable} ${montserrat.variable} h-full`}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col antialiased">
-        <div className="grain" aria-hidden />
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
-      </body>
+      <body className="flex min-h-full flex-col antialiased">{children}</body>
     </html>
   );
 }

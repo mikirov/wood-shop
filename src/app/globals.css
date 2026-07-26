@@ -24,7 +24,7 @@
   --color-accent-strong: var(--accent-strong);
   --color-resin: var(--resin);
   --font-sans: var(--font-montserrat);
-  --font-serif: var(--font-cormorant);
+  --font-serif: var(--font-cormorant), var(--font-noto-serif);
 }
 
 * {

@@ -5,7 +5,7 @@ import {
   submitQuote,
   type QuoteActionState,
 } from "@/lib/actions/quote";
-import type { CatalogProduct } from "@/lib/catalog";
+import type { Dictionary } from "@/i18n/dictionaries";
 
 const initialState: QuoteActionState = {
   ok: false,
@@ -13,17 +13,23 @@ const initialState: QuoteActionState = {
 };
 
 type QuoteFormProps = {
-  products: CatalogProduct[];
+  dictionary: Dictionary;
+  products: Array<{ slug: string; name: string }>;
   selectedSlug?: string;
 };
 
-export function QuoteForm({ products, selectedSlug }: QuoteFormProps) {
+export function QuoteForm({
+  dictionary,
+  products,
+  selectedSlug,
+}: QuoteFormProps) {
   const [state, formAction, pending] = useActionState(submitQuote, initialState);
+  const q = dictionary.quote;
 
   if (state.ok) {
     return (
       <div className="border border-accent/40 bg-surface px-6 py-10">
-        <p className="font-serif text-3xl text-foreground">Request received</p>
+        <p className="font-serif text-3xl text-foreground">{q.successTitle}</p>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted">
           {state.message}
         </p>
@@ -35,7 +41,7 @@ export function QuoteForm({ products, selectedSlug }: QuoteFormProps) {
     <form action={formAction} className="space-y-6">
       <div className="grid gap-6 md:grid-cols-2">
         <div>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">{q.name}</label>
           <input id="name" name="name" required autoComplete="name" />
           {state.fieldErrors?.name?.[0] ? (
             <p className="mt-2 text-sm text-accent-strong">
@@ -44,7 +50,7 @@ export function QuoteForm({ products, selectedSlug }: QuoteFormProps) {
           ) : null}
         </div>
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{q.email}</label>
           <input
             id="email"
             name="email"
@@ -62,17 +68,17 @@ export function QuoteForm({ products, selectedSlug }: QuoteFormProps) {
 
       <div className="grid gap-6 md:grid-cols-2">
         <div>
-          <label htmlFor="phone">Phone (optional)</label>
+          <label htmlFor="phone">{q.phone}</label>
           <input id="phone" name="phone" type="tel" autoComplete="tel" />
         </div>
         <div>
-          <label htmlFor="productSlug">Piece of interest</label>
+          <label htmlFor="productSlug">{q.product}</label>
           <select
             id="productSlug"
             name="productSlug"
             defaultValue={selectedSlug ?? ""}
           >
-            <option value="">General inquiry</option>
+            <option value="">{q.general}</option>
             {products.map((product) => (
               <option key={product.slug} value={product.slug}>
                 {product.name}
@@ -83,22 +89,22 @@ export function QuoteForm({ products, selectedSlug }: QuoteFormProps) {
       </div>
 
       <div>
-        <label htmlFor="preferredDimensions">Preferred dimensions</label>
+        <label htmlFor="preferredDimensions">{q.dimensions}</label>
         <input
           id="preferredDimensions"
           name="preferredDimensions"
-          placeholder='e.g. 108" × 42"'
+          placeholder='e.g. 240 × 100 cm'
         />
       </div>
 
       <div>
-        <label htmlFor="message">Message</label>
+        <label htmlFor="message">{q.message}</label>
         <textarea
           id="message"
           name="message"
           rows={6}
           required
-          placeholder="Tell us about the room, timeline, and any wood or resin preferences."
+          placeholder={q.messagePlaceholder}
         />
         {state.fieldErrors?.message?.[0] ? (
           <p className="mt-2 text-sm text-accent-strong">
@@ -116,7 +122,7 @@ export function QuoteForm({ products, selectedSlug }: QuoteFormProps) {
         disabled={pending}
         className="cursor-pointer border border-accent bg-accent px-8 py-3 text-xs tracking-[0.2em] text-background uppercase hover:bg-accent-strong hover:border-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {pending ? "Sending…" : "Submit request"}
+        {pending ? q.sending : q.submit}
       </button>
     </form>
   );
