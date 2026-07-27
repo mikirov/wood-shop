@@ -17,7 +17,7 @@ const en = {
   home: {
     headline: "Epoxy tables and wood pieces from our workshop in Bulgaria.",
     subhead:
-      "Coasters, boards, trays, candle holders, and ashtrays are in the shop with fixed prices and ready to ship. Custom tables start with an enquiry — the photos are examples to help you describe what you want.",
+      "Small flat workshop pieces are in the shop with fixed prices and ready to ship. Custom tables start with an enquiry — the photos are examples to help you describe what you want.",
     ctaCollection: "Browse the shop",
     ctaQuote: "Ask about a custom table",
     tablesEyebrow: "Custom work",
@@ -77,7 +77,7 @@ const en = {
     eyebrow: "Shop",
     title: "Pieces you can buy now",
     intro:
-      "Coasters, boards, trays, candle holders, and ashtrays in blue or black resin. Lead time is 0 days — they’re ready to ship with Econt.",
+      "Everyday wood pieces — coasters, boards, rests, openers, and more — in blue or black resin. Lead time is 0 days — they’re ready to ship with Econt.",
     buyNow: "Buy",
     resinLabel: "Resin colour",
     resinBlue: "Blue",
@@ -265,7 +265,7 @@ const bg: typeof en = {
   home: {
     headline: "Епоксидни маси и дървени изделия от нашата работилница в България.",
     subhead:
-      "Подложките, дъските, тавите, свещниците и пепелниците са в магазина с фиксирани цени и готови за изпращане. Поръчковите маси започват със запитване — снимките са примери, за да опишете какво искате.",
+      "Малките плоски изделия са в магазина с фиксирани цени и готови за изпращане. Поръчковите маси започват със запитване — снимките са примери, за да опишете какво искате.",
     ctaCollection: "Към магазина",
     ctaQuote: "Запитване за поръчкова маса",
     tablesEyebrow: "Поръчкова работа",
@@ -325,7 +325,7 @@ const bg: typeof en = {
     eyebrow: "Магазин",
     title: "Изделия, които можете да купите сега",
     intro:
-      "Подложки, дъски, тави, свещници и пепелници в синя или черна смола. Срок 0 дни — готови са за изпращане с Еконт.",
+      "Ежедневни дървени изделия — подложки, дъски, поставки, отварачки и още — в синя или черна смола. Срок 0 дни — готови са за изпращане с Еконт.",
     buyNow: "Купи",
     resinLabel: "Цвят на смолата",
     resinBlue: "Синя",

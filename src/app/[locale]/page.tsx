@@ -63,7 +63,13 @@ export default async function HomePage({ params }: PageProps) {
   );
   const shopItems = products
     .filter((product) => product.category === "shop")
-    .filter((product) => !product.resin || product.resin === "blue");
+    .filter((product, _index, list) => {
+      const family = product.family ?? product.slug;
+      return (
+        list.find((item) => (item.family ?? item.slug) === family) === product
+      );
+    })
+    .slice(0, 6);
   const t = dictionary.home;
 
   return (

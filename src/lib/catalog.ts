@@ -7,7 +7,21 @@ export type ResinColor = "blue" | "black";
 export type CatalogProduct = {
   slug: string;
   category: "shop" | "custom";
-  family?: "coasters" | "board" | "tray" | "candle-holder" | "ashtray";
+  family?:
+    | "coasters"
+    | "board"
+    | "tray"
+    | "ashtray"
+    | "phone-stand"
+    | "soap-dish"
+    | "spoon-rest"
+    | "trivet"
+    | "jewelry-dish"
+    | "pen-rest"
+    | "cheese-spreader"
+    | "bottle-opener"
+    | "match-tray"
+    | "plant-saucer";
   resin?: ResinColor;
   name: LocalizedText;
   tagline: LocalizedText;
@@ -310,68 +324,6 @@ export const CATALOG: CatalogProduct[] = [
     sortOrder: 15,
   },
   {
-    slug: "candle-holder-blue",
-    category: "shop",
-    family: "candle-holder",
-    resin: "blue",
-    name: {
-      en: "Candle holder — blue resin",
-      bg: "Свещник — синя смола",
-    },
-    tagline: {
-      en: "Turned cylinder with a blue resin ring.",
-      bg: "Стругован цилиндър със син смолен пръстен.",
-    },
-    description: {
-      en: "A short walnut cylinder with a centered candle recess and a blue epoxy ring turned into a groove. Simple lathe form — ready to ship; also in black resin.",
-      bg: "Къс орехов цилиндър с гнездо за свещ и син епоксиден пръстен в стругована бразда. Проста форма за струг — готово за изпращане; има и с черна смола.",
-    },
-    materials: {
-      en: "Walnut, blue epoxy resin, oil finish",
-      bg: "Орех, синя епоксидна смола, маслено покритие",
-    },
-    dimensions: {
-      en: "About Ø 8 cm × 8 cm H · candle recess Ø 2.2 cm",
-      bg: "Около Ø 8 см × 8 см В · гнездо Ø 2.2 см",
-    },
-    leadTime: readyLeadTime,
-    pricing: { type: "fixed", amountEur: 48 },
-    heroImage: "/products/candle-holder-blue.jpg",
-    galleryImages: ["/products/candle-holder-blue.jpg"],
-    sortOrder: 16,
-  },
-  {
-    slug: "candle-holder-black",
-    category: "shop",
-    family: "candle-holder",
-    resin: "black",
-    name: {
-      en: "Candle holder — black resin",
-      bg: "Свещник — черна смола",
-    },
-    tagline: {
-      en: "Turned cylinder with a black resin ring.",
-      bg: "Стругован цилиндър с черен смолен пръстен.",
-    },
-    description: {
-      en: "Same machinable candle holder with opaque black resin. Ready to ship via Econt.",
-      bg: "Същият свещник с черна смола. Готов за изпращане с Еконт.",
-    },
-    materials: {
-      en: "Walnut, black epoxy resin, oil finish",
-      bg: "Орех, черна епоксидна смола, маслено покритие",
-    },
-    dimensions: {
-      en: "About Ø 8 cm × 8 cm H · candle recess Ø 2.2 cm",
-      bg: "Около Ø 8 см × 8 см В · гнездо Ø 2.2 см",
-    },
-    leadTime: readyLeadTime,
-    pricing: { type: "fixed", amountEur: 48 },
-    heroImage: "/products/candle-holder-black.jpg",
-    galleryImages: ["/products/candle-holder-black.jpg"],
-    sortOrder: 17,
-  },
-  {
     slug: "ashtray-blue",
     category: "shop",
     family: "ashtray",
@@ -432,6 +384,316 @@ export const CATALOG: CatalogProduct[] = [
     heroImage: "/products/ashtray-black.jpg",
     galleryImages: ["/products/ashtray-black.jpg"],
     sortOrder: 19,
+  },
+  {
+    slug: "phone-stand-blue",
+    category: "shop",
+    family: "phone-stand",
+    resin: "blue",
+    name: {
+      en: "Phone stand — blue resin",
+      bg: "Стойка за телефон — синя смола",
+    },
+    tagline: {
+      en: "Flat angled wedge for desk or kitchen.",
+      bg: "Плоска наклонена подпора за бюро или кухня.",
+    },
+    description: {
+      en: "A simple CNC wedge that holds a phone upright with a small lip. Blue resin stripe across the face. Thin profile, easy to machine.",
+      bg: "Проста CNC подпора, която държи телефона изправен с малък праг. Синя смолна лента отпред. Тънък профил, лесен за обработка.",
+    },
+    materials: {
+      en: "Walnut, blue epoxy resin, oil finish",
+      bg: "Орех, синя епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About 12 × 8 × 2.5 cm",
+      bg: "Около 12 × 8 × 2.5 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 36 },
+    heroImage: "/products/phone-stand-blue.jpg",
+    galleryImages: ["/products/phone-stand-blue.jpg"],
+    sortOrder: 20,
+  },
+  {
+    slug: "soap-dish-black",
+    category: "shop",
+    family: "soap-dish",
+    resin: "black",
+    name: {
+      en: "Soap dish — black resin",
+      bg: "Сапунерка — черна смола",
+    },
+    tagline: {
+      en: "Slotted board for the sink edge.",
+      bg: "Плочка с канали за мивката.",
+    },
+    description: {
+      en: "Flat oak soap dish with drainage grooves and a black resin edge. Keeps the bar dry without a thick profile.",
+      bg: "Плоска дъбова сапунерка с отводнителни канали и черен смолен кант. Държи сапуна сух без дебел профил.",
+    },
+    materials: {
+      en: "Oak, black epoxy resin, oil finish",
+      bg: "Дъб, черна епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About 12 × 9 × 1.5 cm",
+      bg: "Около 12 × 9 × 1.5 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 32 },
+    heroImage: "/products/soap-dish-black.jpg",
+    galleryImages: ["/products/soap-dish-black.jpg"],
+    sortOrder: 21,
+  },
+  {
+    slug: "spoon-rest-blue",
+    category: "shop",
+    family: "spoon-rest",
+    resin: "blue",
+    name: {
+      en: "Spoon rest — blue resin",
+      bg: "Поставка за лъжица — синя смола",
+    },
+    tagline: {
+      en: "Stovetop rest with a shallow channel.",
+      bg: "Поставка до котлона с плитък улей.",
+    },
+    description: {
+      en: "Curved walnut rest for a cooking spoon. Flat enough to mill quickly, blue resin line as a quiet accent.",
+      bg: "Извита орехова поставка за готварска лъжица. Достатъчно плоска за бързо фрезоване, синя смолна линия като акцент.",
+    },
+    materials: {
+      en: "Walnut, blue epoxy resin, food-safe oil",
+      bg: "Орех, синя епоксидна смола, хранително-безопасно масло",
+    },
+    dimensions: {
+      en: "About 22 × 9 × 1.8 cm",
+      bg: "Около 22 × 9 × 1.8 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 34 },
+    heroImage: "/products/spoon-rest-blue.jpg",
+    galleryImages: ["/products/spoon-rest-blue.jpg"],
+    sortOrder: 22,
+  },
+  {
+    slug: "trivet-black",
+    category: "shop",
+    family: "trivet",
+    resin: "black",
+    name: {
+      en: "Trivet — black resin",
+      bg: "Подложка за горещо — черна смола",
+    },
+    tagline: {
+      en: "Round hot pad with a resin ring.",
+      bg: "Кръгла подложка с смолен пръстен.",
+    },
+    description: {
+      en: "Thin ash disc for pots and pans. Cutouts keep it light; black resin ring frames the face. Easy flat CNC job.",
+      bg: "Тънък ясенов диск за тенджери и тигани. Изрезите го олекотяват; черен смолен пръстен рамкира лицето. Лесна плоска CNC работа.",
+    },
+    materials: {
+      en: "Ash, black epoxy resin, oil finish",
+      bg: "Ясен, черна епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About Ø 18 cm × 1.2 cm",
+      bg: "Около Ø 18 см × 1.2 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 38 },
+    heroImage: "/products/trivet-black.jpg",
+    galleryImages: ["/products/trivet-black.jpg"],
+    sortOrder: 23,
+  },
+  {
+    slug: "jewelry-dish-blue",
+    category: "shop",
+    family: "jewelry-dish",
+    resin: "blue",
+    name: {
+      en: "Jewelry dish — blue resin",
+      bg: "Купичка за бижута — синя смола",
+    },
+    tagline: {
+      en: "Bedside catch for rings and earrings.",
+      bg: "Нощна купичка за пръстени и обеци.",
+    },
+    description: {
+      en: "Shallow round walnut dish with a blue resin well. Flat enough for a quick lathe or CNC pass.",
+      bg: "Плитка кръгла орехова купичка със синя смолна падина. Достатъчно плоска за бърз струг или CNC.",
+    },
+    materials: {
+      en: "Walnut, blue epoxy resin, oil finish",
+      bg: "Орех, синя епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About Ø 10 cm × 1.5 cm",
+      bg: "Около Ø 10 см × 1.5 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 28 },
+    heroImage: "/products/jewelry-dish-blue.jpg",
+    galleryImages: ["/products/jewelry-dish-blue.jpg"],
+    sortOrder: 24,
+  },
+  {
+    slug: "pen-rest-black",
+    category: "shop",
+    family: "pen-rest",
+    resin: "black",
+    name: {
+      en: "Pen rest — black resin",
+      bg: "Поставка за писалки — черна смола",
+    },
+    tagline: {
+      en: "Long desk groove for pens.",
+      bg: "Дълъг улей за бюрото.",
+    },
+    description: {
+      en: "A slim oak bar with a pen groove and black resin stripe. Sits flat on the desk; mills from a thin blank.",
+      bg: "Тънка дъбова летва с улей за писалки и черна смолна лента. Лежи плоско на бюрото; фрезова се от тънък заготовък.",
+    },
+    materials: {
+      en: "Oak, black epoxy resin, oil finish",
+      bg: "Дъб, черна епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About 24 × 5 × 1.5 cm",
+      bg: "Около 24 × 5 × 1.5 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 30 },
+    heroImage: "/products/pen-rest-black.jpg",
+    galleryImages: ["/products/pen-rest-black.jpg"],
+    sortOrder: 25,
+  },
+  {
+    slug: "cheese-spreader-blue",
+    category: "shop",
+    family: "cheese-spreader",
+    resin: "blue",
+    name: {
+      en: "Cheese spreader — blue resin",
+      bg: "Ножче за сирене — синя смола",
+    },
+    tagline: {
+      en: "Flat spreader for soft cheese and butter.",
+      bg: "Плоско ножче за меко сирене и масло.",
+    },
+    description: {
+      en: "Thin walnut spreader with a blue resin accent in the handle. Food-safe oil; simple 2D profile.",
+      bg: "Тънко орехово ножче със син смолен акцент в дръжката. Хранително-безопасно масло; прост 2D профил.",
+    },
+    materials: {
+      en: "Walnut, blue epoxy resin, food-safe oil",
+      bg: "Орех, синя епоксидна смола, хранително-безопасно масло",
+    },
+    dimensions: {
+      en: "About 16 × 3 × 0.8 cm",
+      bg: "Около 16 × 3 × 0.8 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 26 },
+    heroImage: "/products/cheese-spreader-blue.jpg",
+    galleryImages: ["/products/cheese-spreader-blue.jpg"],
+    sortOrder: 26,
+  },
+  {
+    slug: "bottle-opener-black",
+    category: "shop",
+    family: "bottle-opener",
+    resin: "black",
+    name: {
+      en: "Bottle opener — black resin",
+      bg: "Отварачка — черна смола",
+    },
+    tagline: {
+      en: "Flat paddle opener for the drawer.",
+      bg: "Плоска отварачка за чекмеджето.",
+    },
+    description: {
+      en: "Ash paddle with black resin inlay and a metal opener insert. Thin blank, easy to batch on a CNC.",
+      bg: "Ясенова лопатка с черна смолна инкрустация и метална отварачка. Тънък заготовък, удобен за серия на CNC.",
+    },
+    materials: {
+      en: "Ash, black epoxy resin, metal opener insert, oil finish",
+      bg: "Ясен, черна епоксидна смола, метална отварачка, маслено покритие",
+    },
+    dimensions: {
+      en: "About 15 × 4 × 1.2 cm",
+      bg: "Около 15 × 4 × 1.2 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 29 },
+    heroImage: "/products/bottle-opener-black.jpg",
+    galleryImages: ["/products/bottle-opener-black.jpg"],
+    sortOrder: 27,
+  },
+  {
+    slug: "match-tray-blue",
+    category: "shop",
+    family: "match-tray",
+    resin: "blue",
+    name: {
+      en: "Match tray — blue resin",
+      bg: "Тавичка за кибрити — синя смола",
+    },
+    tagline: {
+      en: "Recessed tray for a matchbox by the stove.",
+      bg: "Вдлъбната тавичка за кибрит до котлона.",
+    },
+    description: {
+      en: "Flat walnut board with a matchbox well and blue resin stripe. Useful next to a candle or gas hob.",
+      bg: "Плоска орехова дъска с гнездо за кибрит и синя смолна лента. Удобна до свещ или газов котлон.",
+    },
+    materials: {
+      en: "Walnut, blue epoxy resin, oil finish",
+      bg: "Орех, синя епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About 14 × 8 × 1.5 cm",
+      bg: "Около 14 × 8 × 1.5 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 27 },
+    heroImage: "/products/match-tray-blue.jpg",
+    galleryImages: ["/products/match-tray-blue.jpg"],
+    sortOrder: 28,
+  },
+  {
+    slug: "plant-saucer-black",
+    category: "shop",
+    family: "plant-saucer",
+    resin: "black",
+    name: {
+      en: "Plant saucer — black resin",
+      bg: "Чинийка за саксия — черна смола",
+    },
+    tagline: {
+      en: "Drip tray for a small pot.",
+      bg: "Подложка против теч за малка саксия.",
+    },
+    description: {
+      en: "Round oak saucer with a raised rim and black resin ring. Protects shelves from watering spills; flat CNC disc.",
+      bg: "Кръгла дъбова чинийка с ръб и черен смолен пръстен. Пази рафтове от поливане; плосък CNC диск.",
+    },
+    materials: {
+      en: "Oak, black epoxy resin, oil finish",
+      bg: "Дъб, черна епоксидна смола, маслено покритие",
+    },
+    dimensions: {
+      en: "About Ø 14 cm × 1.5 cm",
+      bg: "Около Ø 14 см × 1.5 см",
+    },
+    leadTime: readyLeadTime,
+    pricing: { type: "fixed", amountEur: 33 },
+    heroImage: "/products/plant-saucer-black.jpg",
+    galleryImages: ["/products/plant-saucer-black.jpg"],
+    sortOrder: 29,
   },
 ];
 
