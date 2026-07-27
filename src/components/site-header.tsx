@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CartLink } from "@/components/cart-link";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
@@ -51,6 +52,7 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
               {link.label}
             </Link>
           ))}
+          <CartLink locale={locale} label={dictionary.nav.cart} />
           <div
             className="flex items-center border border-border/80 text-[0.65rem] tracking-[0.14em]"
             aria-label="Language"

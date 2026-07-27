@@ -1,11 +1,12 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   placeOrder,
   type CheckoutActionState,
 } from "@/lib/actions/checkout";
+import { useCart } from "@/components/cart-provider";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
@@ -17,23 +18,23 @@ const initialState: CheckoutActionState = {
 type CheckoutFormProps = {
   locale: Locale;
   dictionary: Dictionary;
-  productSlug: string;
-  productName: string;
-  unitPriceLabel: string;
 };
 
-export function CheckoutForm({
-  locale,
-  dictionary,
-  productSlug,
-  productName,
-  unitPriceLabel,
-}: CheckoutFormProps) {
+export function CheckoutForm({ locale, dictionary }: CheckoutFormProps) {
   const [state, formAction, pending] = useActionState(placeOrder, initialState);
   const [deliveryType, setDeliveryType] = useState<"office" | "address">(
     "office",
   );
+  const { lines, subtotalEur, clear, ready } = useCart();
   const c = dictionary.checkout;
+
+  useEffect(() => {
+    if (state.ok) clear();
+  }, [state.ok, clear]);
+
+  if (!ready) {
+    return <p className="text-sm text-muted">{dictionary.cart.loading}</p>;
+  }
 
   if (state.ok) {
     return (
@@ -48,38 +49,57 @@ export function CheckoutForm({
           </p>
         ) : null}
         <Link
-          href={`/${locale}/shop/${productSlug}`}
+          href={`/${locale}/shop`}
           className="mt-8 inline-flex cursor-pointer text-xs tracking-[0.16em] text-accent uppercase hover:text-foreground"
         >
-          {c.backToProduct}
+          {c.backToShop}
         </Link>
       </div>
     );
   }
 
+  if (lines.length === 0) {
+    return (
+      <div className="border border-border bg-surface px-6 py-10">
+        <p className="text-sm text-muted">{dictionary.cart.empty}</p>
+        <Link
+          href={`/${locale}/cart`}
+          className="mt-6 inline-flex text-xs tracking-[0.16em] text-accent uppercase"
+        >
+          {dictionary.nav.cart} →
+        </Link>
+      </div>
+    );
+  }
+
+  const linesJson = JSON.stringify(
+    lines.map((line) => ({ slug: line.slug, quantity: line.quantity })),
+  );
+
   return (
     <form action={formAction} className="space-y-6">
-      <input type="hidden" name="productSlug" value={productSlug} />
+      <input type="hidden" name="linesJson" value={linesJson} />
 
       <div className="border border-border bg-surface p-5">
         <p className="text-xs tracking-[0.14em] text-accent uppercase">
           {c.product}
         </p>
-        <p className="mt-2 font-serif text-2xl text-foreground">{productName}</p>
-        <p className="mt-1 text-sm text-muted">{unitPriceLabel}</p>
-      </div>
-
-      <div>
-        <label htmlFor="quantity">{c.quantity}</label>
-        <input
-          id="quantity"
-          name="quantity"
-          type="number"
-          min={1}
-          max={20}
-          defaultValue={1}
-          required
-        />
+        <ul className="mt-3 space-y-2">
+          {lines.map((line) => (
+            <li
+              key={line.slug}
+              className="flex justify-between gap-4 text-sm text-foreground"
+            >
+              <span>
+                {line.name} × {line.quantity}
+              </span>
+              <span>€{(line.unitPriceEur * line.quantity).toFixed(0)}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-4 font-serif text-2xl text-foreground">
+          €{subtotalEur.toFixed(0)}
+        </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -173,20 +193,10 @@ export function CheckoutForm({
             <label htmlFor="econtOfficeCode">{c.officeCode}</label>
             <input id="econtOfficeCode" name="econtOfficeCode" required />
             <p className="mt-2 text-xs text-muted">{c.officeHint}</p>
-            {state.fieldErrors?.econtOfficeCode?.[0] ? (
-              <p className="mt-2 text-sm text-accent-strong">
-                {state.fieldErrors.econtOfficeCode[0]}
-              </p>
-            ) : null}
           </div>
           <div>
             <label htmlFor="econtOfficeName">{c.officeName}</label>
             <input id="econtOfficeName" name="econtOfficeName" required />
-            {state.fieldErrors?.econtOfficeName?.[0] ? (
-              <p className="mt-2 text-sm text-accent-strong">
-                {state.fieldErrors.econtOfficeName[0]}
-              </p>
-            ) : null}
           </div>
         </div>
       ) : (
@@ -195,20 +205,10 @@ export function CheckoutForm({
             <div>
               <label htmlFor="street">{c.street}</label>
               <input id="street" name="street" required autoComplete="street-address" />
-              {state.fieldErrors?.street?.[0] ? (
-                <p className="mt-2 text-sm text-accent-strong">
-                  {state.fieldErrors.street[0]}
-                </p>
-              ) : null}
             </div>
             <div>
               <label htmlFor="streetNumber">{c.streetNumber}</label>
               <input id="streetNumber" name="streetNumber" required />
-              {state.fieldErrors?.streetNumber?.[0] ? (
-                <p className="mt-2 text-sm text-accent-strong">
-                  {state.fieldErrors.streetNumber[0]}
-                </p>
-              ) : null}
             </div>
           </div>
           <div>

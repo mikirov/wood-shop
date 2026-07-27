@@ -7,21 +7,7 @@ export type ResinColor = "blue" | "black";
 export type CatalogProduct = {
   slug: string;
   category: "shop" | "custom";
-  family?:
-    | "coasters"
-    | "board"
-    | "tray"
-    | "ashtray"
-    | "phone-stand"
-    | "soap-dish"
-    | "spoon-rest"
-    | "trivet"
-    | "jewelry-dish"
-    | "pen-rest"
-    | "cheese-spreader"
-    | "bottle-opener"
-    | "match-tray"
-    | "plant-saucer";
+  family?: string;
   resin?: ResinColor;
   name: LocalizedText;
   tagline: LocalizedText;

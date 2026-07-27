@@ -17,22 +17,34 @@ async function seed() {
       .where(eq(products.slug, item.slug))
       .limit(1);
 
-    const priceFrom =
-      item.pricing.type === "fixed" ? `€${item.pricing.amountEur}` : null;
+    const priceEur =
+      item.pricing.type === "fixed" ? item.pricing.amountEur.toFixed(2) : null;
 
     const payload = {
       slug: item.slug,
+      category: item.category,
+      family: item.family ?? null,
+      resin: item.resin ?? null,
       name: item.name.en,
+      nameBg: item.name.bg,
       tagline: item.tagline.en,
+      taglineBg: item.tagline.bg,
       description: item.description.en,
+      descriptionBg: item.description.bg,
       materials: item.materials.en,
+      materialsBg: item.materials.bg,
       dimensions: item.dimensions.en,
+      dimensionsBg: item.dimensions.bg,
       leadTime: item.leadTime.en,
-      priceFrom,
+      leadTimeBg: item.leadTime.bg,
+      pricingType: item.pricing.type,
+      priceEur,
+      priceFrom: priceEur ? `€${item.pricing.type === "fixed" ? item.pricing.amountEur : ""}` : null,
       heroImage: item.heroImage,
       galleryImages: JSON.stringify(item.galleryImages),
       sortOrder: item.sortOrder,
       active: true,
+      updatedAt: new Date(),
     };
 
     if (existing[0]) {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { desc, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { StatusSelect } from "@/components/status-select";
@@ -59,14 +60,22 @@ export default async function AdminPage() {
             Orders & inquiries
           </h1>
         </div>
-        <form action={logoutAdmin}>
-          <button
-            type="submit"
-            className="cursor-pointer border border-border px-4 py-2 text-xs tracking-[0.16em] text-muted uppercase hover:border-accent hover:text-accent"
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/admin/products"
+            className="cursor-pointer border border-accent px-4 py-2 text-xs tracking-[0.16em] text-accent uppercase hover:bg-accent hover:text-background"
           >
-            Sign out
-          </button>
-        </form>
+            Products
+          </Link>
+          <form action={logoutAdmin}>
+            <button
+              type="submit"
+              className="cursor-pointer border border-border px-4 py-2 text-xs tracking-[0.16em] text-muted uppercase hover:border-accent hover:text-accent"
+            >
+              Sign out
+            </button>
+          </form>
+        </div>
       </div>
 
       <h2 className="mt-12 font-serif text-3xl text-foreground">Orders</h2>
@@ -84,6 +93,27 @@ export default async function AdminPage() {
                   <p className="font-serif text-2xl text-foreground">
                     {row.productName} × {row.quantity}
                   </p>
+                  {(() => {
+                    try {
+                      const lines = JSON.parse(row.lineItemsJson || "[]") as Array<{
+                        name: string;
+                        quantity: number;
+                        lineTotalEur: number;
+                      }>;
+                      if (!Array.isArray(lines) || lines.length === 0) return null;
+                      return (
+                        <ul className="mt-2 space-y-1 text-sm text-muted">
+                          {lines.map((line) => (
+                            <li key={`${line.name}-${line.quantity}`}>
+                              {line.name} × {line.quantity} · €{line.lineTotalEur}
+                            </li>
+                          ))}
+                        </ul>
+                      );
+                    } catch {
+                      return null;
+                    }
+                  })()}
                   <p className="mt-2 text-sm text-muted">
                     €{row.totalEur} · {row.customerName} · {row.customerEmail} ·{" "}
                     {row.customerPhone}

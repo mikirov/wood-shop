@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { ProductMedia } from "@/components/product-media";
 import Link from "next/link";
 import { JsonLd, organizationJsonLd } from "@/components/json-ld";
 import { isLocale, type Locale } from "@/i18n/config";
@@ -77,7 +77,7 @@ export default async function HomePage({ params }: PageProps) {
       <JsonLd data={organizationJsonLd(locale)} />
       <section className="relative min-h-[100svh] overflow-hidden">
         {featured ? (
-          <Image
+          <ProductMedia
             src={featured.heroImage}
             alt={featured.name}
             fill
@@ -134,7 +134,7 @@ export default async function HomePage({ params }: PageProps) {
                 className="group cursor-pointer"
               >
                 <div className="relative aspect-square overflow-hidden bg-surface">
-                  <Image
+                  <ProductMedia
                     src={product.heroImage}
                     alt={product.name}
                     fill
@@ -182,7 +182,7 @@ export default async function HomePage({ params }: PageProps) {
               className="group cursor-pointer"
             >
               <div className="relative aspect-[4/5] overflow-hidden bg-surface">
-                <Image
+                <ProductMedia
                   src={product.heroImage}
                   alt={product.name}
                   fill

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import { ProductMedia } from "@/components/product-media";
 import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { listProducts } from "@/lib/products";
 import { getSiteUrl } from "@/lib/site";
+
+export const dynamic = "force-dynamic";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -72,7 +74,7 @@ export default async function CustomPage({ params }: PageProps) {
             href={`/${locale}/custom/${product.slug}`}
             className="group relative block min-h-[60vh] overflow-hidden"
           >
-            <Image
+            <ProductMedia
               src={product.heroImage}
               alt={product.name}
               fill

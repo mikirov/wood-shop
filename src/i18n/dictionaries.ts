@@ -9,6 +9,7 @@ const en = {
     atelier: "Workshop",
     quote: "Ask for a quote",
     contact: "Contact",
+    cart: "Cart",
   },
   header: {
     langEn: "EN",
@@ -108,6 +109,9 @@ const en = {
     price: "Price",
     quoteCta: "Ask for a quote",
     buyCta: "Order with Econt",
+    addToCart: "Add to basket",
+    addedToCart: "Added",
+    viewCart: "View basket",
     fixedNote: "Price in EUR. Delivery calculated / arranged via Econt at checkout.",
     quoteNote: "We’ll answer within a couple of working days with price and timing.",
   },
@@ -142,6 +146,18 @@ const en = {
     successBody:
       "Thanks — we’ve saved your order and sent a confirmation to your email. We’ll prepare the Econt shipment next.",
     backToProduct: "Back to the product",
+    backToShop: "Back to the shop",
+  },
+  cart: {
+    eyebrow: "Basket",
+    title: "Your basket",
+    empty: "Your basket is empty.",
+    loading: "Loading basket…",
+    quantity: "Qty",
+    remove: "Remove",
+    subtotal: "Subtotal",
+    checkout: "Checkout",
+    continueShopping: "Continue shopping",
   },
   about: {
     eyebrow: "Workshop",
@@ -257,6 +273,7 @@ const bg: typeof en = {
     atelier: "Работилница",
     quote: "Запитване",
     contact: "Контакти",
+    cart: "Кошница",
   },
   header: {
     langEn: "EN",
@@ -356,6 +373,9 @@ const bg: typeof en = {
     price: "Цена",
     quoteCta: "Изпрати запитване",
     buyCta: "Поръчай с Еконт",
+    addToCart: "Добави в кошницата",
+    addedToCart: "Добавено",
+    viewCart: "Към кошницата",
     fixedNote: "Цена в евро. Доставката се уговаря чрез Еконт при поръчка.",
     quoteNote: "Отговаряме в рамките на два работни дни с цена и срок.",
   },
@@ -390,6 +410,18 @@ const bg: typeof en = {
     successBody:
       "Благодарим — запазихме поръчката и изпратихме потвърждение на имейла ви. Следва подготовка на пратката с Еконт.",
     backToProduct: "Обратно към продукта",
+    backToShop: "Обратно към магазина",
+  },
+  cart: {
+    eyebrow: "Кошница",
+    title: "Вашата кошница",
+    empty: "Кошницата е празна.",
+    loading: "Зареждане…",
+    quantity: "Бр.",
+    remove: "Премахни",
+    subtotal: "Междинна сума",
+    checkout: "Към поръчка",
+    continueShopping: "Към магазина",
   },
   about: {
     eyebrow: "Работилница",

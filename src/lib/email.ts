@@ -5,6 +5,7 @@ type OrderEmailInput = {
   productName: string;
   quantity: number;
   totalEur: string;
+  linesText?: string;
   customerName: string;
   customerEmail: string;
   customerPhone: string;
@@ -48,8 +49,8 @@ function buildBodies(input: OrderEmailInput) {
 
   const shared = `
 Order ID: ${input.orderId}
-Product: ${input.productName}
-Quantity: ${input.quantity}
+Items:
+${input.linesText ?? `- ${input.productName} × ${input.quantity}`}
 Total: €${input.totalEur}
 
 Customer: ${input.customerName}

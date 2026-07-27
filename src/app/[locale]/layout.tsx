@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { CartProvider } from "@/components/cart-provider";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
@@ -22,11 +23,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   const dictionary = getDictionary(locale);
 
   return (
-    <div lang={locale} className="flex min-h-full flex-col">
-      <div className="grain" aria-hidden />
-      <SiteHeader locale={locale} dictionary={dictionary} />
-      <main className="flex-1">{children}</main>
-      <SiteFooter locale={locale} dictionary={dictionary} />
-    </div>
+    <CartProvider>
+      <div lang={locale} className="flex min-h-full flex-col">
+        <div className="grain" aria-hidden />
+        <SiteHeader locale={locale} dictionary={dictionary} />
+        <main className="flex-1">{children}</main>
+        <SiteFooter locale={locale} dictionary={dictionary} />
+      </div>
+    </CartProvider>
   );
 }

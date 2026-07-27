@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { CheckoutForm } from "@/components/checkout-form";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { getProductBySlug } from "@/lib/products";
 import { getSiteUrl } from "@/lib/site";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ product?: string }>;
 };
 
 export async function generateMetadata({
@@ -29,20 +27,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function CheckoutPage({ params, searchParams }: PageProps) {
+export default async function CheckoutPage({ params }: PageProps) {
   const { locale: raw } = await params;
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
-  const { product: slug } = await searchParams;
-  if (!slug) {
-    redirect(`/${locale}/shop`);
-  }
-
-  const product = await getProductBySlug(slug, locale);
-  if (!product || product.pricing.type !== "fixed") {
-    redirect(`/${locale}/quote?product=${slug}`);
-  }
-
   const dictionary = getDictionary(locale);
   const c = dictionary.checkout;
 
@@ -60,13 +48,7 @@ export default async function CheckoutPage({ params, searchParams }: PageProps) 
             {c.intro}
           </p>
         </div>
-        <CheckoutForm
-          locale={locale}
-          dictionary={dictionary}
-          productSlug={product.slug}
-          productName={product.name}
-          unitPriceLabel={product.priceLabel ?? ""}
-        />
+        <CheckoutForm locale={locale} dictionary={dictionary} />
       </div>
     </div>
   );

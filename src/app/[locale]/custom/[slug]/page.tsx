@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd, productJsonLd } from "@/components/json-ld";
-import { getCustomExamples } from "@/lib/catalog";
-import { isLocale, locales, type Locale } from "@/i18n/config";
+import { ProductSlideshow } from "@/components/product-slideshow";
+import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getProductBySlug } from "@/lib/products";
 import { getSiteUrl } from "@/lib/site";
 
+export const dynamic = "force-dynamic";
+
 type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
-
-export async function generateStaticParams() {
-  return locales.flatMap((locale) =>
-    getCustomExamples().map((product) => ({ locale, slug: product.slug })),
-  );
-}
 
 export async function generateMetadata({
   params,
@@ -58,22 +53,21 @@ export default async function CustomExamplePage({ params }: PageProps) {
           locale,
           name: product.name,
           description: product.description,
-          image: product.heroImage,
+          image: product.heroImage.startsWith("data:")
+            ? "/brand/mark.svg"
+            : product.heroImage,
           slug: product.slug,
           pathPrefix: "custom",
         })}
       />
       <section className="relative min-h-[70vh] overflow-hidden">
-        <Image
-          src={product.heroImage}
+        <ProductSlideshow
+          images={product.images}
           alt={product.name}
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
+          className="min-h-[70vh]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/20" />
-        <div className="relative z-10 mx-auto flex min-h-[70vh] max-w-7xl items-end px-6 pb-16 md:px-10">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/20" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 mx-auto flex max-w-7xl items-end px-6 pb-16 md:px-10">
           <div>
             <p className="text-xs tracking-[0.2em] text-accent uppercase">
               {c.exampleBadge}
