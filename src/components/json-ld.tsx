@@ -22,7 +22,7 @@ export function organizationJsonLd(locale: Locale) {
     name: "Obsidian River",
     url: `${siteUrl}/${locale}`,
     logo: `${siteUrl}/products/midnight-vein.jpg`,
-    email: "atelier@obsidianriver.eu",
+    email: "shimonchick@gmail.com",
     address: {
       "@type": "PostalAddress",
       addressCountry: "BG",

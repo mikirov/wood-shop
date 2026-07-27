@@ -1,10 +1,11 @@
 "use server";
 
 import { z } from "zod";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { getDb, hasDatabaseUrl } from "@/db";
 import { orders, products } from "@/db/schema";
 import { sendOrderEmails } from "@/lib/email";
+import { nextInvoiceNumber } from "@/lib/invoice";
 import { dbRowToCatalog } from "@/lib/products";
 
 const lineSchema = z.object({
@@ -68,6 +69,7 @@ export type CheckoutActionState = {
   ok: boolean;
   message: string;
   orderId?: string;
+  invoiceNumber?: string;
   fieldErrors?: Record<string, string[]>;
 };
 
@@ -122,7 +124,7 @@ export async function placeOrder(
   try {
     const db = getDb();
     const resolved: Array<{
-      productId: string | null;
+      productId: string;
       slug: string;
       name: string;
       quantity: number;
@@ -141,6 +143,15 @@ export async function placeOrder(
         return {
           ok: false,
           message: `Product “${line.slug}” is not available for checkout.`,
+        };
+      }
+      if (row.stockQty < line.quantity) {
+        return {
+          ok: false,
+          message:
+            row.stockQty <= 0
+              ? `“${row.name}” is sold out.`
+              : `Only ${row.stockQty} left of “${row.name}”.`,
         };
       }
       const catalog = dbRowToCatalog(row);
@@ -163,10 +174,9 @@ export async function placeOrder(
     const total = resolved.reduce((sum, line) => sum + line.lineTotalEur, 0);
     const quantity = resolved.reduce((sum, line) => sum + line.quantity, 0);
     const summaryName =
-      resolved.length === 1
-        ? resolved[0].name
-        : `${resolved.length} items`;
+      resolved.length === 1 ? resolved[0].name : `${resolved.length} items`;
     const primary = resolved[0];
+    const invoiceNumber = await nextInvoiceNumber();
 
     const [inserted] = await db
       .insert(orders)
@@ -186,6 +196,7 @@ export async function placeOrder(
             lineTotalEur: line.lineTotalEur,
           })),
         ),
+        invoiceNumber,
         customerName: parsed.data.customerName,
         customerEmail: parsed.data.customerEmail,
         customerPhone: parsed.data.customerPhone,
@@ -203,6 +214,16 @@ export async function placeOrder(
       })
       .returning({ id: orders.id });
 
+    for (const line of resolved) {
+      await db
+        .update(products)
+        .set({
+          stockQty: sql`${products.stockQty} - ${line.quantity}`,
+          updatedAt: new Date(),
+        })
+        .where(eq(products.id, line.productId));
+    }
+
     const orderId = inserted.id;
     const linesText = resolved
       .map(
@@ -213,6 +234,7 @@ export async function placeOrder(
 
     await sendOrderEmails({
       orderId,
+      invoiceNumber,
       productName: summaryName,
       quantity,
       totalEur: total.toFixed(2),
@@ -236,6 +258,7 @@ export async function placeOrder(
       ok: true,
       message: "Order placed.",
       orderId,
+      invoiceNumber,
     };
   } catch (error) {
     console.error(error);

@@ -57,6 +57,7 @@ export const products = pgTable("products", {
   heroImage: text("hero_image").notNull(),
   galleryImages: text("gallery_images").notNull().default("[]"),
   sortOrder: integer("sort_order").notNull().default(0),
+  stockQty: integer("stock_qty").notNull().default(10),
   active: boolean("active").notNull().default(true),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()
@@ -89,6 +90,7 @@ export const orders = pgTable("orders", {
   unitPriceEur: numeric("unit_price_eur", { precision: 10, scale: 2 }).notNull(),
   totalEur: numeric("total_eur", { precision: 10, scale: 2 }).notNull(),
   lineItemsJson: text("line_items_json").notNull().default("[]"),
+  invoiceNumber: text("invoice_number").unique(),
   customerName: text("customer_name").notNull(),
   customerEmail: text("customer_email").notNull(),
   customerPhone: text("customer_phone").notNull(),

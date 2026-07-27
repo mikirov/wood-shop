@@ -5,46 +5,29 @@ import { eq } from "drizzle-orm";
 import { getDb } from "./index";
 import { products } from "./schema";
 import { parseGalleryImages } from "../lib/images";
+import { compressImageToDataUrl } from "../lib/images-server";
 
 config({ path: ".env.local" });
 config();
 
-const MIME_BY_EXT: Record<string, string> = {
-  ".jpg": "image/jpeg",
-  ".jpeg": "image/jpeg",
-  ".png": "image/png",
-  ".webp": "image/webp",
-  ".gif": "image/gif",
-  ".svg": "image/svg+xml",
-};
+const recompress = process.argv.includes("--recompress");
 
 function isFilePath(src: string) {
   return src.startsWith("/") && !src.startsWith("//") && !src.startsWith("/data:");
 }
 
-async function pathToDataUrl(publicPath: string) {
-  const absolute = path.join(process.cwd(), "public", publicPath.replace(/^\//, ""));
-  const ext = path.extname(absolute).toLowerCase();
-  const mime = MIME_BY_EXT[ext];
-  if (!mime) {
-    throw new Error(`Unsupported image type for ${publicPath}`);
+async function toCompressedDataUrl(src: string) {
+  if (src.startsWith("data:image/")) {
+    if (!recompress) return src;
+    const base64 = src.split(",")[1] ?? "";
+    return compressImageToDataUrl(Buffer.from(base64, "base64"));
   }
-  try {
-    const buffer = await readFile(absolute);
-    return `data:${mime};base64,${buffer.toString("base64")}`;
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
-      throw new Error(`File missing: ${publicPath}`);
-    }
-    throw error;
-  }
-}
 
-async function embedIfNeeded(src: string) {
-  if (!src) return src;
-  if (src.startsWith("data:image/")) return src;
   if (!isFilePath(src)) return src;
-  return pathToDataUrl(src);
+
+  const absolute = path.join(process.cwd(), "public", src.replace(/^\//, ""));
+  const buffer = await readFile(absolute);
+  return compressImageToDataUrl(buffer);
 }
 
 async function main() {
@@ -56,11 +39,11 @@ async function main() {
   for (const row of rows) {
     try {
       const gallery = parseGalleryImages(row.galleryImages);
-      const nextHero = await embedIfNeeded(row.heroImage);
+      const nextHero = await toCompressedDataUrl(row.heroImage);
       const nextGallery: string[] = [];
       for (const image of gallery) {
         if (image === row.heroImage) continue;
-        nextGallery.push(await embedIfNeeded(image));
+        nextGallery.push(await toCompressedDataUrl(image));
       }
 
       const heroChanged = nextHero !== row.heroImage;
@@ -69,7 +52,7 @@ async function main() {
 
       if (!heroChanged && !galleryChanged) {
         skipped += 1;
-        console.log(`Skip (already embedded or remote): ${row.slug}`);
+        console.log(`Skip: ${row.slug}`);
         continue;
       }
 

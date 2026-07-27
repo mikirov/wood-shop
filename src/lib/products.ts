@@ -15,6 +15,8 @@ import type { Locale } from "@/i18n/config";
 export type StoreProduct = ReturnType<typeof localizeProduct> & {
   id?: string;
   images: string[];
+  stockQty: number;
+  inStock: boolean;
 };
 
 function pickLocalized(
@@ -74,6 +76,7 @@ export function dbRowToCatalog(row: Product): CatalogProduct {
     heroImage: row.heroImage,
     galleryImages: gallery.length > 0 ? gallery : [row.heroImage],
     sortOrder: row.sortOrder,
+    stockQty: row.stockQty ?? 0,
   };
 }
 
@@ -83,10 +86,13 @@ function toStoreProduct(
   id?: string,
 ): StoreProduct {
   const localized = localizeProduct(item, locale);
+  const stockQty = item.stockQty ?? 10;
   return {
     ...localized,
     id,
     images: collectProductImages(item.heroImage, JSON.stringify(item.galleryImages)),
+    stockQty,
+    inStock: item.category === "custom" ? true : stockQty > 0,
   };
 }
 

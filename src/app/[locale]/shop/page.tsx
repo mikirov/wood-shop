@@ -86,7 +86,7 @@ export default async function ShopPage({ params }: PageProps) {
                 {product.priceLabel}
               </p>
               <p className="text-xs tracking-[0.12em] text-muted uppercase">
-                {product.leadTime}
+                {product.inStock ? product.leadTime : dictionary.product.soldOut}
               </p>
             </div>
             <p className="mt-4 text-xs tracking-[0.16em] text-foreground uppercase group-hover:text-accent">

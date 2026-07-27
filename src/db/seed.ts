@@ -20,6 +20,9 @@ async function seed() {
     const priceEur =
       item.pricing.type === "fixed" ? item.pricing.amountEur.toFixed(2) : null;
 
+    const keepImages =
+      existing[0]?.heroImage?.startsWith("data:image/") ?? false;
+
     const payload = {
       slug: item.slug,
       category: item.category,
@@ -40,9 +43,12 @@ async function seed() {
       pricingType: item.pricing.type,
       priceEur,
       priceFrom: priceEur ? `€${item.pricing.type === "fixed" ? item.pricing.amountEur : ""}` : null,
-      heroImage: item.heroImage,
-      galleryImages: JSON.stringify(item.galleryImages),
+      heroImage: keepImages ? existing[0].heroImage : item.heroImage,
+      galleryImages: keepImages
+        ? existing[0].galleryImages
+        : JSON.stringify(item.galleryImages),
       sortOrder: item.sortOrder,
+      stockQty: existing[0]?.stockQty ?? (item.category === "shop" ? 10 : 0),
       active: true,
       updatedAt: new Date(),
     };

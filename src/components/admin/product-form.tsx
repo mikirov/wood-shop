@@ -66,6 +66,12 @@ export function ProductForm({ mode, product }: ProductFormProps) {
       <div className="grid gap-4 md:grid-cols-2">
         <Field label="Slug" name="slug" defaultValue={product?.slug} error={state.fieldErrors?.slug?.[0]} required />
         <Field label="Sort order" name="sortOrder" type="number" defaultValue={String(product?.sortOrder ?? 0)} />
+        <Field
+          label="Stock quantity"
+          name="stockQty"
+          type="number"
+          defaultValue={String(product?.stockQty ?? 10)}
+        />
         <label className="block text-sm">
           <span className="text-muted">Category</span>
           <select name="category" defaultValue={product?.category ?? "shop"} className="mt-1 w-full">

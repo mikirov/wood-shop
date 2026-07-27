@@ -1,7 +1,9 @@
 import nodemailer from "nodemailer";
+import { COMPANY, formatBankTransferInstructions } from "@/lib/company";
 
 type OrderEmailInput = {
   orderId: string;
+  invoiceNumber: string;
   productName: string;
   quantity: number;
   totalEur: string;
@@ -45,13 +47,23 @@ function buildBodies(input: OrderEmailInput) {
   const payment =
     input.paymentMethod === "cod"
       ? "Cash on delivery (Econt)"
-      : "Bank transfer (details in a follow-up email if needed)";
+      : `Bank transfer\n${formatBankTransferInstructions()}`;
+
+  const seller = [
+    `Seller: ${COMPANY.legalName} (UIC ${COMPANY.uic})`,
+    `Trading as: ${COMPANY.tradingName}`,
+    COMPANY.addressLines.join(", "),
+    COMPANY.vatNote,
+  ].join("\n");
 
   const shared = `
+Invoice: ${input.invoiceNumber}
 Order ID: ${input.orderId}
 Items:
 ${input.linesText ?? `- ${input.productName} × ${input.quantity}`}
 Total: €${input.totalEur}
+
+${seller}
 
 Customer: ${input.customerName}
 Email: ${input.customerEmail}
@@ -65,9 +77,9 @@ ${input.notes ? `\nNotes: ${input.notes}` : ""}
 `.trim();
 
   return {
-    customerSubject: `Order confirmation — ${input.productName}`,
-    customerText: `Hi ${input.customerName},\n\nWe received your order. Here's a copy of the details:\n\n${shared}\n\nWe'll prepare the Econt shipment and write again if we need anything.\n\n— Obsidian River`,
-    atelierSubject: `New order — ${input.productName}`,
+    customerSubject: `Invoice ${input.invoiceNumber} — Obsidian River`,
+    customerText: `Hi ${input.customerName},\n\nWe received your order. Invoice ${input.invoiceNumber}:\n\n${shared}\n\nWe'll prepare the Econt shipment and write again if we need anything.\n\n— ${COMPANY.tradingName} / ${COMPANY.legalName}`,
+    atelierSubject: `New order ${input.invoiceNumber} — ${input.productName}`,
     atelierText: `New shop order:\n\n${shared}`,
   };
 }
@@ -94,7 +106,7 @@ export async function sendOrderEmails(input: OrderEmailInput) {
     process.env.ORDER_FROM_EMAIL?.trim() ||
     (smtp ? `Obsidian River <${smtp.user}>` : "Obsidian River <noreply@localhost>");
   const notify =
-    process.env.ORDER_NOTIFY_EMAIL?.trim() || "atelier@obsidianriver.eu";
+    process.env.ORDER_NOTIFY_EMAIL?.trim() || COMPANY.email;
   const bodies = buildBodies(input);
 
   if (!smtp) {

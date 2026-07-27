@@ -120,16 +120,22 @@ export default async function ShopProductPage({ params }: PageProps) {
             {product.description}
           </p>
           {product.pricing.type === "fixed" ? (
-            <AddToCartButton
-              locale={locale}
-              slug={product.slug}
-              name={product.name}
-              unitPriceEur={priceEur}
-              image={product.heroImage}
-              label={p.addToCart}
-              addedLabel={p.addedToCart}
-              viewCartLabel={p.viewCart}
-            />
+            product.inStock ? (
+              <AddToCartButton
+                locale={locale}
+                slug={product.slug}
+                name={product.name}
+                unitPriceEur={priceEur}
+                image={product.heroImage}
+                label={p.addToCart}
+                addedLabel={p.addedToCart}
+                viewCartLabel={p.viewCart}
+              />
+            ) : (
+              <p className="mt-10 text-xs tracking-[0.2em] text-accent uppercase">
+                {p.soldOut}
+              </p>
+            )
           ) : null}
         </div>
 
@@ -173,7 +179,17 @@ export default async function ShopProductPage({ params }: PageProps) {
             <p className="mt-3 font-serif text-3xl text-foreground">
               {product.priceLabel}
             </p>
-            <p className="mt-2 text-xs text-muted">{p.fixedNote}</p>
+            {product.pricing.type === "fixed" ? (
+              <p className="mt-2 text-xs text-muted">
+                {product.inStock
+                  ? product.stockQty <= 3
+                    ? p.lowStock.replace("{n}", String(product.stockQty))
+                    : p.fixedNote
+                  : p.soldOut}
+              </p>
+            ) : (
+              <p className="mt-2 text-xs text-muted">{p.fixedNote}</p>
+            )}
           </div>
         </aside>
       </section>

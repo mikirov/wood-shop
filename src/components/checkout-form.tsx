@@ -7,6 +7,7 @@ import {
   type CheckoutActionState,
 } from "@/lib/actions/checkout";
 import { useCart } from "@/components/cart-provider";
+import { formatBankTransferInstructions } from "@/lib/company";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
@@ -25,8 +26,10 @@ export function CheckoutForm({ locale, dictionary }: CheckoutFormProps) {
   const [deliveryType, setDeliveryType] = useState<"office" | "address">(
     "office",
   );
+  const [paymentMethod, setPaymentMethod] = useState<"cod" | "bank">("cod");
   const { lines, subtotalEur, clear, ready } = useCart();
   const c = dictionary.checkout;
+  const bankDetails = formatBankTransferInstructions();
 
   useEffect(() => {
     if (state.ok) clear();
@@ -43,11 +46,22 @@ export function CheckoutForm({ locale, dictionary }: CheckoutFormProps) {
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted">
           {c.successBody}
         </p>
+        {state.invoiceNumber ? (
+          <p className="mt-3 text-sm text-foreground">
+            {c.invoiceLabel}: {state.invoiceNumber}
+          </p>
+        ) : null}
         {state.orderId ? (
-          <p className="mt-3 text-xs tracking-[0.12em] text-muted uppercase">
+          <p className="mt-2 text-xs tracking-[0.12em] text-muted uppercase">
             ID {state.orderId}
           </p>
         ) : null}
+        <div className="mt-6 border border-border bg-background/40 p-4 text-sm text-muted whitespace-pre-line">
+          <p className="text-xs tracking-[0.14em] text-accent uppercase">
+            {c.bankDetailsTitle}
+          </p>
+          <p className="mt-3">{bankDetails}</p>
+        </div>
         <Link
           href={`/${locale}/shop`}
           className="mt-8 inline-flex cursor-pointer text-xs tracking-[0.16em] text-accent uppercase hover:text-foreground"
@@ -223,14 +237,35 @@ export function CheckoutForm({ locale, dictionary }: CheckoutFormProps) {
           {c.payment}
         </legend>
         <label className="flex cursor-pointer items-center gap-3 text-sm text-foreground">
-          <input type="radio" name="paymentMethod" value="cod" defaultChecked />
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="cod"
+            checked={paymentMethod === "cod"}
+            onChange={() => setPaymentMethod("cod")}
+          />
           {c.cod}
         </label>
         <label className="flex cursor-pointer items-center gap-3 text-sm text-foreground">
-          <input type="radio" name="paymentMethod" value="bank" />
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="bank"
+            checked={paymentMethod === "bank"}
+            onChange={() => setPaymentMethod("bank")}
+          />
           {c.bank}
         </label>
       </fieldset>
+
+      {paymentMethod === "bank" ? (
+        <div className="border border-border bg-surface p-4 text-sm text-muted whitespace-pre-line">
+          <p className="text-xs tracking-[0.14em] text-accent uppercase">
+            {c.bankDetailsTitle}
+          </p>
+          <p className="mt-3">{bankDetails}</p>
+        </div>
+      ) : null}
 
       <div>
         <label htmlFor="notes">{c.notes}</label>

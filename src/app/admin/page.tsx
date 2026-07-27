@@ -93,6 +93,11 @@ export default async function AdminPage() {
                   <p className="font-serif text-2xl text-foreground">
                     {row.productName} × {row.quantity}
                   </p>
+                  {row.invoiceNumber ? (
+                    <p className="mt-1 text-xs tracking-[0.12em] text-accent uppercase">
+                      Invoice {row.invoiceNumber}
+                    </p>
+                  ) : null}
                   {(() => {
                     try {
                       const lines = JSON.parse(row.lineItemsJson || "[]") as Array<{

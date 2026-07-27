@@ -5,7 +5,8 @@ import { z } from "zod";
 import { getDb, hasDatabaseUrl } from "@/db";
 import { products } from "@/db/schema";
 import { isAdminAuthenticated } from "@/lib/auth";
-import { filesToDataUrls, parseGalleryImages } from "@/lib/images";
+import { filesToDataUrls } from "@/lib/images-server";
+import { parseGalleryImages } from "@/lib/images";
 import { revalidateStorefront } from "@/lib/revalidate";
 
 export type ProductActionState = {
@@ -39,6 +40,7 @@ const productSchema = z.object({
   pricingType: z.enum(["fixed", "quote"]),
   priceEur: z.string().trim().optional(),
   sortOrder: z.coerce.number().int().min(0).max(9999),
+  stockQty: z.coerce.number().int().min(0).max(99999),
   active: z.enum(["true", "false"]),
 });
 
@@ -67,6 +69,7 @@ function parseForm(formData: FormData) {
     pricingType: formData.get("pricingType"),
     priceEur: formData.get("priceEur") || undefined,
     sortOrder: formData.get("sortOrder") || 0,
+    stockQty: formData.get("stockQty") || 0,
     active: formData.get("active") || "true",
   });
 }
@@ -147,6 +150,7 @@ export async function createProduct(
         heroImage: uploaded[0],
         galleryImages: JSON.stringify(uploaded.slice(1)),
         sortOrder: parsed.data.sortOrder,
+        stockQty: parsed.data.stockQty,
         active: parsed.data.active === "true",
         updatedAt: new Date(),
       })
@@ -263,6 +267,7 @@ export async function updateProduct(
         heroImage: images[0],
         galleryImages: JSON.stringify(images.slice(1)),
         sortOrder: parsed.data.sortOrder,
+        stockQty: parsed.data.stockQty,
         active: parsed.data.active === "true",
         updatedAt: new Date(),
       })

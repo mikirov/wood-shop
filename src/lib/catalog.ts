@@ -19,6 +19,7 @@ export type CatalogProduct = {
   heroImage: string;
   galleryImages: string[];
   sortOrder: number;
+  stockQty?: number;
 };
 
 const readyLeadTime: LocalizedText = {
