@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/add-to-cart-button";
 import { JsonLd, productJsonLd } from "@/components/json-ld";
 import { ProductSlideshow } from "@/components/product-slideshow";
+import { ProductTrust } from "@/components/product-trust";
 import { ResinVariantPicker } from "@/components/resin-variant-picker";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -77,6 +78,14 @@ export default async function ShopProductPage({ params }: PageProps) {
 
   return (
     <div className="pt-20">
+      <div className="mx-auto max-w-7xl px-6 pt-6 md:px-10">
+        <Link
+          href={`/${locale}/shop`}
+          className="inline-flex text-xs tracking-[0.16em] text-muted uppercase hover:text-accent"
+        >
+          ← {p.backToShop}
+        </Link>
+      </div>
       <JsonLd
         data={productJsonLd({
           locale,
@@ -93,7 +102,7 @@ export default async function ShopProductPage({ params }: PageProps) {
           pathPrefix: "shop",
         })}
       />
-      <section className="relative min-h-[65vh] overflow-hidden">
+      <section className="relative mt-4 min-h-[65vh] overflow-hidden">
         <ProductSlideshow
           images={product.images}
           alt={product.name}
@@ -193,6 +202,14 @@ export default async function ShopProductPage({ params }: PageProps) {
           </div>
         </aside>
       </section>
+
+      <div className="mx-auto max-w-7xl px-6 pb-24 md:px-10">
+        <ProductTrust
+          dictionary={dictionary}
+          productSlug={product.slug}
+          productName={product.name}
+        />
+      </div>
     </div>
   );
 }

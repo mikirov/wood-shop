@@ -48,6 +48,14 @@ export default async function CustomExamplePage({ params }: PageProps) {
 
   return (
     <div className="pt-20">
+      <div className="mx-auto max-w-7xl px-6 pt-6 md:px-10">
+        <Link
+          href={`/${locale}/custom`}
+          className="inline-flex text-xs tracking-[0.16em] text-muted uppercase hover:text-accent"
+        >
+          ← {dictionary.nav.custom}
+        </Link>
+      </div>
       <JsonLd
         data={productJsonLd({
           locale,
@@ -60,7 +68,7 @@ export default async function CustomExamplePage({ params }: PageProps) {
           pathPrefix: "custom",
         })}
       />
-      <section className="relative min-h-[70vh] overflow-hidden">
+      <section className="relative mt-4 min-h-[70vh] overflow-hidden">
         <ProductSlideshow
           images={product.images}
           alt={product.name}

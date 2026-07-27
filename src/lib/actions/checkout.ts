@@ -29,6 +29,7 @@ const checkoutSchema = z
     addressExtra: z.string().trim().optional(),
     paymentMethod: z.enum(["cod", "bank"]),
     notes: z.string().trim().optional(),
+    engraving: z.string().trim().optional(),
   })
   .superRefine((data, ctx) => {
     if (data.deliveryType === "office") {
@@ -92,6 +93,7 @@ export async function placeOrder(
     addressExtra: formData.get("addressExtra") || undefined,
     paymentMethod: formData.get("paymentMethod"),
     notes: formData.get("notes") || undefined,
+    engraving: formData.get("engraving") || undefined,
   });
 
   if (!parsed.success) {
@@ -177,6 +179,14 @@ export async function placeOrder(
       resolved.length === 1 ? resolved[0].name : `${resolved.length} items`;
     const primary = resolved[0];
     const invoiceNumber = await nextInvoiceNumber();
+    const combinedNotes = [
+      parsed.data.notes?.trim(),
+      parsed.data.engraving?.trim()
+        ? `Engraving / gift note: ${parsed.data.engraving.trim()}`
+        : null,
+    ]
+      .filter(Boolean)
+      .join("\n");
 
     const [inserted] = await db
       .insert(orders)
@@ -209,7 +219,7 @@ export async function placeOrder(
         streetNumber: parsed.data.streetNumber ?? null,
         addressExtra: parsed.data.addressExtra ?? null,
         paymentMethod: parsed.data.paymentMethod,
-        notes: parsed.data.notes ?? null,
+        notes: combinedNotes || null,
         status: "new",
       })
       .returning({ id: orders.id });
@@ -251,7 +261,7 @@ export async function placeOrder(
       streetNumber: parsed.data.streetNumber,
       addressExtra: parsed.data.addressExtra,
       paymentMethod: parsed.data.paymentMethod,
-      notes: parsed.data.notes,
+      notes: combinedNotes || null,
     });
 
     return {

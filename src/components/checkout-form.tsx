@@ -1,12 +1,13 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   placeOrder,
   type CheckoutActionState,
 } from "@/lib/actions/checkout";
 import { useCart } from "@/components/cart-provider";
+import { EcontOfficePicker } from "@/components/econt-office-picker";
 import { formatBankTransferInstructions } from "@/lib/company";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
@@ -27,9 +28,20 @@ export function CheckoutForm({ locale, dictionary }: CheckoutFormProps) {
     "office",
   );
   const [paymentMethod, setPaymentMethod] = useState<"cod" | "bank">("cod");
+  const [city, setCity] = useState("");
+  const [postCode, setPostCode] = useState("");
   const { lines, subtotalEur, clear, ready } = useCart();
   const c = dictionary.checkout;
   const bankDetails = formatBankTransferInstructions();
+
+  const onCityMeta = useCallback(
+    (selected: { name: string; nameEn?: string; postCode?: string } | null) => {
+      if (!selected) return;
+      setCity(locale === "bg" ? selected.name : selected.nameEn || selected.name);
+      if (selected.postCode) setPostCode(selected.postCode);
+    },
+    [locale],
+  );
 
   useEffect(() => {
     if (state.ok) clear();
@@ -188,7 +200,14 @@ export function CheckoutForm({ locale, dictionary }: CheckoutFormProps) {
       <div className="grid gap-6 md:grid-cols-2">
         <div>
           <label htmlFor="city">{c.city}</label>
-          <input id="city" name="city" required autoComplete="address-level2" />
+          <input
+            id="city"
+            name="city"
+            required
+            autoComplete="address-level2"
+            value={city}
+            onChange={(event) => setCity(event.target.value)}
+          />
         </div>
         <div>
           <label htmlFor="postCode">{c.postCode}</label>
@@ -197,22 +216,27 @@ export function CheckoutForm({ locale, dictionary }: CheckoutFormProps) {
             name="postCode"
             required
             autoComplete="postal-code"
+            value={postCode}
+            onChange={(event) => setPostCode(event.target.value)}
           />
         </div>
       </div>
 
       {deliveryType === "office" ? (
-        <div className="space-y-6">
-          <div>
-            <label htmlFor="econtOfficeCode">{c.officeCode}</label>
-            <input id="econtOfficeCode" name="econtOfficeCode" required />
-            <p className="mt-2 text-xs text-muted">{c.officeHint}</p>
-          </div>
-          <div>
-            <label htmlFor="econtOfficeName">{c.officeName}</label>
-            <input id="econtOfficeName" name="econtOfficeName" required />
-          </div>
-        </div>
+        <EcontOfficePicker
+          locale={locale}
+          onCityMeta={onCityMeta}
+          labels={{
+            citySearch: c.econtCitySearch,
+            cityPlaceholder: c.econtCityPlaceholder,
+            office: c.econtOffice,
+            officePlaceholder: c.econtOfficePlaceholder,
+            officeLoading: c.econtOfficeLoading,
+            officeEmpty: c.econtOfficeEmpty,
+            findMap: c.econtFindMap,
+            selected: c.econtSelected,
+          }}
+        />
       ) : (
         <div className="space-y-6">
           <div className="grid gap-6 md:grid-cols-[1.4fr_0.6fr]">
@@ -231,6 +255,16 @@ export function CheckoutForm({ locale, dictionary }: CheckoutFormProps) {
           </div>
         </div>
       )}
+
+      <div>
+        <label htmlFor="engraving">{c.engravingNote}</label>
+        <textarea
+          id="engraving"
+          name="engraving"
+          rows={2}
+          placeholder={c.engravingPlaceholder}
+        />
+      </div>
 
       <fieldset className="space-y-3">
         <legend className="text-xs tracking-[0.14em] text-muted uppercase">
