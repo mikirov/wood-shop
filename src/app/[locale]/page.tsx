@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { ProductMedia } from "@/components/product-media";
 import Link from "next/link";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { JsonLd, organizationJsonLd } from "@/components/json-ld";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { faqPageJsonLd } from "@/lib/blog-json-ld";
 import { listProducts } from "@/lib/products";
 import { getSiteUrl } from "@/lib/site";
 import { notFound } from "next/navigation";
@@ -75,6 +77,7 @@ export default async function HomePage({ params }: PageProps) {
   return (
     <>
       <JsonLd data={organizationJsonLd(locale)} />
+      <JsonLd data={faqPageJsonLd(locale, t.faqs)} />
       <section className="relative min-h-[100svh] overflow-hidden">
         {featured ? (
           <ProductMedia
@@ -220,28 +223,19 @@ export default async function HomePage({ params }: PageProps) {
             </div>
           ))}
         </div>
+        <Link
+          href={`/${locale}/blog`}
+          className="mt-12 inline-flex text-xs tracking-[0.16em] text-accent uppercase hover:text-foreground"
+        >
+          {dictionary.nav.blog} →
+        </Link>
       </section>
 
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-24 md:px-10">
-          <p className="text-xs tracking-[0.2em] text-accent uppercase">
-            {t.faqEyebrow}
-          </p>
-          <h2 className="mt-3 font-serif text-4xl text-foreground md:text-5xl">
-            {t.faqTitle}
-          </h2>
-          <dl className="mt-12 max-w-3xl space-y-8">
-            {t.faqs.map((item) => (
-              <div key={item.q}>
-                <dt className="font-serif text-xl text-foreground">{item.q}</dt>
-                <dd className="mt-3 text-sm leading-relaxed text-muted">
-                  {item.a}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
+      <FaqAccordion
+        items={t.faqs}
+        eyebrow={t.faqEyebrow}
+        title={t.faqTitle}
+      />
     </>
   );
 }

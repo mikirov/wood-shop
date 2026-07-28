@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/add-to-cart-button";
+import { HeartButton } from "@/components/heart-button";
 import { JsonLd, productJsonLd } from "@/components/json-ld";
 import { ProductSlideshow } from "@/components/product-slideshow";
 import { ProductTrust } from "@/components/product-trust";
@@ -109,7 +110,7 @@ export default async function ShopProductPage({ params }: PageProps) {
           className="min-h-[65vh]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/20" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 mx-auto flex max-w-7xl items-end px-6 pb-16 md:px-10">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 mx-auto flex max-w-7xl items-end justify-between gap-4 px-6 pb-16 md:px-10">
           <div>
             <p className="text-xs tracking-[0.2em] text-accent uppercase">
               {p.object}
@@ -118,6 +119,23 @@ export default async function ShopProductPage({ params }: PageProps) {
               {product.name}
             </h1>
             <p className="mt-4 max-w-xl text-base text-muted">{product.tagline}</p>
+            <p className="mt-4 max-w-md text-xs tracking-[0.14em] text-accent uppercase">
+              {p.lifetimeBadge}
+            </p>
+          </div>
+          <div className="pointer-events-auto shrink-0">
+            <HeartButton
+              item={{
+                slug: product.slug,
+                name: product.name,
+                image: product.heroImage,
+                priceLabel: product.priceLabel,
+                href: `/${locale}/shop/${product.slug}`,
+              }}
+              addLabel={p.heartAdd}
+              removeLabel={p.heartRemove}
+              className="h-12 w-12 border-border/80 bg-background/90 backdrop-blur-sm"
+            />
           </div>
         </div>
       </section>

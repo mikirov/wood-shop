@@ -12,6 +12,7 @@ export function SiteFooter({ locale, dictionary }: SiteFooterProps) {
   const shop = [
     { href: `/${locale}/shop`, label: dictionary.nav.shop },
     { href: `/${locale}/custom`, label: dictionary.nav.custom },
+    { href: `/${locale}/blog`, label: dictionary.nav.blog },
     { href: `/${locale}/about`, label: dictionary.nav.atelier },
     { href: `/${locale}/quote`, label: dictionary.nav.quote },
   ];

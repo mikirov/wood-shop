@@ -10,7 +10,7 @@ type ProductTrustProps = {
 function pickReviews(
   reviews: Dictionary["product"]["reviews"],
   slug: string,
-  count = 3,
+  count = 4,
 ) {
   let hash = 0;
   for (let i = 0; i < slug.length; i += 1) {
@@ -36,6 +36,26 @@ export function ProductTrust({
 
   return (
     <div className="mt-16 space-y-14 border-t border-border pt-14">
+      <section>
+        <p className="text-xs tracking-[0.2em] text-accent uppercase">
+          {p.guaranteeEyebrow}
+        </p>
+        <h3 className="mt-3 font-serif text-3xl text-foreground">
+          {p.guaranteeTitle}
+        </h3>
+        <p className="mt-4 inline-block border border-accent/40 bg-accent/10 px-4 py-2 text-xs tracking-[0.16em] text-accent uppercase">
+          {p.lifetimeBadge}
+        </p>
+        <ul className="mt-6 grid gap-4 md:grid-cols-3">
+          {p.guarantees.map((item) => (
+            <li key={item.title} className="border border-border bg-surface p-5">
+              <p className="font-serif text-xl text-foreground">{item.title}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{item.body}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section>
         <p className="text-xs tracking-[0.2em] text-accent uppercase">
           {p.giftEyebrow}
@@ -71,31 +91,17 @@ export function ProductTrust({
 
       <section>
         <p className="text-xs tracking-[0.2em] text-accent uppercase">
-          {p.guaranteeEyebrow}
-        </p>
-        <h3 className="mt-3 font-serif text-3xl text-foreground">
-          {p.guaranteeTitle}
-        </h3>
-        <ul className="mt-6 grid gap-4 md:grid-cols-3">
-          {p.guarantees.map((item) => (
-            <li key={item.title} className="border border-border bg-surface p-5">
-              <p className="font-serif text-xl text-foreground">{item.title}</p>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{item.body}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section>
-        <p className="text-xs tracking-[0.2em] text-accent uppercase">
           {p.reviewsEyebrow}
         </p>
         <h3 className="mt-3 font-serif text-3xl text-foreground">
           {p.reviewsTitle}
         </h3>
-        <ul className="mt-8 grid gap-6 md:grid-cols-3">
+        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {reviews.map((review) => (
-            <li key={review.name + review.text.slice(0, 12)} className="border border-border bg-surface p-5">
+            <li
+              key={review.name + review.text.slice(0, 12)}
+              className="border border-border bg-surface p-5"
+            >
               <p className="text-xs tracking-[0.14em] text-accent uppercase">
                 {review.rating}
               </p>

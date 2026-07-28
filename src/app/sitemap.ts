@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { BLOG_POSTS } from "@/content/blog/posts";
 import { CATALOG } from "@/lib/catalog";
 import { locales } from "@/i18n/config";
 import { getSiteUrl } from "@/lib/site";
@@ -8,6 +9,7 @@ const staticPaths = [
   "/shop",
   "/custom",
   "/about",
+  "/blog",
   "/quote",
   "/contact",
   "/shipping",
@@ -50,5 +52,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  return [...pages, ...products];
+  const posts = locales.flatMap((locale) =>
+    BLOG_POSTS.map((post) => ({
+      url: `${siteUrl}/${locale}/blog/${post.slug}`,
+      lastModified: new Date(post.publishedAt),
+      alternates: {
+        languages: Object.fromEntries(
+          locales.map((alt) => [
+            alt,
+            `${siteUrl}/${alt}/blog/${post.slug}`,
+          ]),
+        ),
+      },
+    })),
+  );
+
+  return [...pages, ...products, ...posts];
 }

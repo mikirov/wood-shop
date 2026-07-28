@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CartLink } from "@/components/cart-link";
+import { WishlistLink } from "@/components/wishlist-link";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
@@ -19,6 +20,7 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
   const links = [
     { href: `/${locale}/shop`, label: dictionary.nav.shop },
     { href: `/${locale}/custom`, label: dictionary.nav.custom },
+    { href: `/${locale}/blog`, label: dictionary.nav.blog },
     { href: `/${locale}/about`, label: dictionary.nav.atelier },
     { href: `/${locale}/contact`, label: dictionary.nav.contact },
   ];
@@ -52,6 +54,7 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
               {link.label}
             </Link>
           ))}
+          <WishlistLink locale={locale} label={dictionary.nav.wishlist} />
           <CartLink locale={locale} label={dictionary.nav.cart} />
           <div
             className="flex items-center border border-border/80 text-[0.65rem] tracking-[0.14em]"

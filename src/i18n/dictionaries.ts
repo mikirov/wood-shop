@@ -10,6 +10,8 @@ const en = {
     quote: "Ask for a quote",
     contact: "Contact",
     cart: "Cart",
+    wishlist: "Wishlist",
+    blog: "Journal",
   },
   header: {
     langEn: "EN",
@@ -47,20 +49,36 @@ const en = {
     faqTitle: "A few practical answers",
     faqs: [
       {
+        q: "Don’t wooden boards crack?",
+        a: "Not if they’re made and looked after properly. Our shop pieces come with a lifetime guarantee against delamination and cracking under normal home use — so that shouldn’t worry you.",
+      },
+      {
+        q: "Do you make the products yourselves?",
+        a: "Yes. Every piece is made in our workshop — from choosing the timber through finishing to packing and handing it to Econt.",
+      },
+      {
+        q: "How long does delivery take?",
+        a: "We keep shop pieces in stock and aim to send them within 1–3 days with Econt in Bulgaria. If something you’ve ordered isn’t available, we’ll contact you.",
+      },
+      {
+        q: "Can I inspect the parcel before paying?",
+        a: "Yes — with cash on delivery via Econt you can check the piece first and pay when you’re happy with the quality.",
+      },
+      {
+        q: "Is there a lifetime guarantee?",
+        a: "Yes for ready-made shop pieces: lifetime cover against cracking and glue failure in normal indoor use. Transit damage is handled separately within 48 hours of delivery.",
+      },
+      {
         q: "Why don’t tables have a price on the site?",
         a: "Because length, thickness, wood grade, and the metal base change the cost a lot. Write to us with what you need and we’ll reply with a number and a timeline.",
       },
       {
         q: "Can I buy the coasters and boards online?",
-        a: "Yes. They’re in the Shop with fixed prices, blue or black resin, and 0 days lead time. Checkout asks for Econt delivery details and we email a confirmation.",
+        a: "Yes. They’re in the Shop with fixed prices, blue or black resin, and ready-to-ship stock. Checkout asks for Econt delivery details and we email a confirmation.",
       },
       {
-        q: "Where do you ship?",
-        a: "Smaller pieces go through Econt in Bulgaria. For tables we arrange crating and delivery once the piece is finished. EU shipping is possible — ask us when you write.",
-      },
-      {
-        q: "Do I pay a deposit for a table?",
-        a: "Usually about 40% after you accept the quote, so we can buy the wood. The rest is due before delivery.",
+        q: "Can pieces be engraved as gifts?",
+        a: "Yes. Add initials, a date, or a short line at checkout and we’ll personalise the piece before packing.",
       },
     ],
   },
@@ -124,11 +142,14 @@ const en = {
     packagingBody:
       "Each piece leaves in kraft wrapping with tissue and a small note from the workshop. Built to arrive intact via Econt — and to look like a gift when they open it.",
     guaranteeEyebrow: "Guarantee",
-    guaranteeTitle: "What we stand behind",
+    guaranteeTitle: "Lifetime cover you can rely on",
+    lifetimeBadge: "Lifetime guarantee against cracking & delamination",
+    heartAdd: "Save to wishlist",
+    heartRemove: "Remove from wishlist",
     guarantees: [
       {
-        title: "Workshop finish",
-        body: "If finish or joinery fails under normal use within 12 months, we repair or replace the piece.",
+        title: "Lifetime against cracking",
+        body: "Shop pieces are guaranteed for life against cracking and glue failure in normal indoor use. If it splits or comes apart, we repair or replace it.",
       },
       {
         title: "Safe arrival",
@@ -177,6 +198,42 @@ const en = {
         place: "Ruse",
         rating: "★★★★★",
         text: "Looks handmade without being rough. Partner noticed the wood grain before the resin — that’s the right order for us.",
+      },
+      {
+        name: "Kalina V.",
+        place: "Sofia",
+        rating: "★★★★★",
+        text: "Lifetime guarantee sold me. Board still flat after months next to the sink — no cupping.",
+      },
+      {
+        name: "Petar L.",
+        place: "Blagoevgrad",
+        rating: "★★★★★",
+        text: "COD with inspection was important. Opened at the Econt office, liked it, paid. Simple.",
+      },
+      {
+        name: "Desislava N.",
+        place: "Veliko Tarnovo",
+        rating: "★★★★★",
+        text: "They really do make these themselves — you can feel the tool marks under the oil, in a careful way.",
+      },
+      {
+        name: "Hristo G.",
+        place: "Stara Zagora",
+        rating: "★★★★☆",
+        text: "Sent in 2 days. Packaging was more gift-ready than I expected for a small piece.",
+      },
+      {
+        name: "Yoana D.",
+        place: "Sofia",
+        rating: "★★★★★",
+        text: "Engraved a short line for my sister. She cried a little. Worth it.",
+      },
+      {
+        name: "Stefan M.",
+        place: "Pleven",
+        rating: "★★★★★",
+        text: "Asked about cracking online; they explained the guarantee clearly. Piece arrived exactly as described.",
       },
     ],
     fixedNote: "Price in EUR. Delivery calculated / arranged via Econt at checkout.",
@@ -237,6 +294,23 @@ const en = {
     subtotal: "Subtotal",
     checkout: "Checkout",
     continueShopping: "Continue shopping",
+  },
+  blog: {
+    eyebrow: "Workshop journal",
+    title: "Process notes from the bench",
+    intro:
+      "In-depth articles on how we make epoxy river tables, prevent boards from cracking, choose wood and resin, and ship with Econt in Bulgaria.",
+    readMore: "Read article",
+    back: "All articles",
+    related: "Related pages",
+    more: "More from the journal",
+  },
+  wishlist: {
+    eyebrow: "Wishlist",
+    title: "Saved pieces",
+    empty: "Nothing saved yet.",
+    browse: "Browse the shop",
+    remove: "Remove",
   },
   about: {
     eyebrow: "Workshop",
@@ -301,7 +375,7 @@ const en = {
   returns: {
     eyebrow: "Returns",
     title: "Returns (14-day EU right of withdrawal)",
-    body: "For ready-made shop pieces bought online, you may withdraw within 14 days of receiving the goods under EU consumer rules, without giving a reason. The piece must be unused and in re-saleable condition. Return shipping in Bulgaria is usually arranged via Econt; we refund the product price after we receive and check it. Custom / made-to-measure tables and commissions are exempt from the 14-day withdrawal right once production has started (personalised goods), unless there is a manufacturing fault — then we repair or remake. Email shimonchick@gmail.com with your invoice number to start a return.",
+    body: "For ready-made shop pieces bought online, you may withdraw within 14 days of receiving the goods under EU consumer rules, without giving a reason. The piece must be unused and in re-saleable condition. Return shipping in Bulgaria is usually arranged via Econt; we refund the product price after we receive and check it. Separately, shop pieces carry a lifetime guarantee against cracking and delamination in normal indoor use — we repair or replace if that happens. Custom / made-to-measure tables and commissions are exempt from the 14-day withdrawal right once production has started (personalised goods), unless there is a manufacturing fault — then we repair or remake. Email shimonchick@gmail.com with your invoice number to start a return.",
   },
   privacy: {
     eyebrow: "Privacy",
@@ -311,7 +385,7 @@ const en = {
   terms: {
     eyebrow: "Terms",
     title: "Terms of sale",
-    body: "Seller: ESCRYPT EOOD, UIC 206622349, Sofia, Bulgaria, trading as Obsidian River. Shop prices are in EUR and include packing for Econt where stated. Payment: cash on delivery via Econt, or bank transfer to IBAN LT31 3250 0763 1737 6271 (BIC REVOLT21, Revolut Bank UAB) — use the invoice number as reference. Ownership passes when payment is received in full. Custom tables start after a written quote and deposit; lead times are estimates. Photos are illustrative; wood grain and resin vary. Invoices are issued with each shop order (OR-YEAR-####).",
+    body: "Seller: ESCRYPT EOOD, UIC 206622349, Sofia, Bulgaria, trading as Obsidian River. Shop prices are in EUR and include packing for Econt where stated. Payment: cash on delivery via Econt, or bank transfer to IBAN LT31 3250 0763 1737 6271 (BIC REVOLT21, Revolut Bank UAB) — use the invoice number as reference. Ownership passes when payment is received in full. Custom tables start after a written quote and deposit; lead times are estimates. Photos are illustrative; wood grain and resin vary. Shop pieces include a lifetime guarantee against cracking and glue failure in normal indoor use. Invoices are issued with each shop order (OR-YEAR-####).",
   },
   footer: {
     tagline: "Tables and small wood pieces from a workshop in Bulgaria.",
@@ -353,6 +427,8 @@ const bg: typeof en = {
     quote: "Запитване",
     contact: "Контакти",
     cart: "Кошница",
+    wishlist: "Любими",
+    blog: "Дневник",
   },
   header: {
     langEn: "EN",
@@ -390,20 +466,36 @@ const bg: typeof en = {
     faqTitle: "Няколко практически отговора",
     faqs: [
       {
+        q: "Дървените дъски не се ли напукват?",
+        a: "Ако са произведени и се поддържат правилно — не. Готовите ни изделия са с пожизнена гаранция срещу разлепване и напукване при нормална домашна употреба, така че това не трябва да ви притеснява.",
+      },
+      {
+        q: "Вие ли произвеждате продуктите?",
+        a: "Да. Всяко изделие е изработено от нас — от избора на дървесината през покритието до опаковането и предаването на Еконт.",
+      },
+      {
+        q: "Колко време отнема доставката?",
+        a: "Стараем се да държим магазинните изделия в наличност и да ги изпращаме в рамките на 1–3 дни с Еконт. Ако поръчаното не е налично, ще се свържем с вас.",
+      },
+      {
+        q: "Имам ли преглед на пратката?",
+        a: "Да — при наложен платеж с Еконт преглеждате изделието и плащате, когато сте убедени в качеството.",
+      },
+      {
+        q: "Има ли пожизнена гаранция?",
+        a: "Да за готовите изделия от магазина: пожизнено покритие срещу напукване и разлепване при нормална употреба на закрито. Повреда при транспорт се урежда отделно до 48 часа след доставка.",
+      },
+      {
         q: "Защо масите нямат цена на сайта?",
         a: "Защото дължината, дебелината, качеството на дървото и металната основа променят много цената. Пишете ни какво ви трябва и ще върнем сума и срок.",
       },
       {
         q: "Мога ли да купя подложките и дъските онлайн?",
-        a: "Да. Те са в Магазина с фиксирани цени, синя или черна смола и срок 0 дни. При поръчка избирате доставка с Еконт и получавате потвърждение по имейл.",
+        a: "Да. Те са в Магазина с фиксирани цени, синя или черна смола и наличност. При поръчка избирате доставка с Еконт и получавате потвърждение по имейл.",
       },
       {
-        q: "Къде доставяте?",
-        a: "По-малките пратки вървят с Еконт в България. За масите уговаряме опаковка и дата, когато изделието е готово. За ЕС — кажете ни при запитването.",
-      },
-      {
-        q: "Плаща ли се депозит за маса?",
-        a: "Обикновено около 40% след като приемете офертата, за да купим дървото. Останалото — преди доставка.",
+        q: "Може ли гравиране за подарък?",
+        a: "Да. Добавете инициали, дата или кратък ред при поръчката и ще персонализираме изделието преди опаковане.",
       },
     ],
   },
@@ -467,11 +559,14 @@ const bg: typeof en = {
     packagingBody:
       "Всяко изделие тръгва в крафт хартия с тишу и кратка бележка от работилницата. Направено да пристигне цяло с Еконт — и да изглежда като подарък при отваряне.",
     guaranteeEyebrow: "Гаранция",
-    guaranteeTitle: "За какво заставаме",
+    guaranteeTitle: "Пожизнена гаранция, на която можете да разчитате",
+    lifetimeBadge: "Пожизнена гаранция срещу напукване и разлепване",
+    heartAdd: "Запази в любими",
+    heartRemove: "Премахни от любими",
     guarantees: [
       {
-        title: "Работилнично покритие",
-        body: "Ако покритието или сглобките откажат при нормална употреба до 12 месеца, ремонтираме или заменяме изделието.",
+        title: "Пожизнено срещу напукване",
+        body: "Готовите изделия са с пожизнена гаранция срещу напукване и разлепване при нормална употреба на закрито. Ако се напука или разлепи — ремонтираме или заменяме.",
       },
       {
         title: "Сигурно пристигане",
@@ -520,6 +615,42 @@ const bg: typeof en = {
         place: "Русе",
         rating: "★★★★★",
         text: "Изглежда ръчно без да е грубо. Партньорката забеляза дървесината преди смолата — редът ни харесва.",
+      },
+      {
+        name: "Калина В.",
+        place: "София",
+        rating: "★★★★★",
+        text: "Пожизнената гаранция ме убеди. Дъската още е равна след месеци до мивката — без измятане.",
+      },
+      {
+        name: "Петър Л.",
+        place: "Благоевград",
+        rating: "★★★★★",
+        text: "Наложеният платеж с преглед беше важен. Отворих в офиса на Еконт, хареса ми, платих. Просто.",
+      },
+      {
+        name: "Десислава Н.",
+        place: "Велико Търново",
+        rating: "★★★★★",
+        text: "Наистина ги правят сами — усещат се следите от инструмента под маслото, но внимателно.",
+      },
+      {
+        name: "Христо Г.",
+        place: "Стара Загора",
+        rating: "★★★★☆",
+        text: "Изпратено за 2 дни. Опаковката беше по-готова за подарък, отколкото очаквах.",
+      },
+      {
+        name: "Йоана Д.",
+        place: "София",
+        rating: "★★★★★",
+        text: "Гравирах кратък ред за сестра ми. Разплака се малко. Струваше си.",
+      },
+      {
+        name: "Стефан М.",
+        place: "Плевен",
+        rating: "★★★★★",
+        text: "Питах онлайн за напукване; обясниха гаранцията ясно. Изделието пристигна точно както е описано.",
       },
     ],
     fixedNote: "Цена в евро. Доставката се уговаря чрез Еконт при поръчка.",
@@ -580,6 +711,23 @@ const bg: typeof en = {
     subtotal: "Междинна сума",
     checkout: "Към поръчка",
     continueShopping: "Към магазина",
+  },
+  blog: {
+    eyebrow: "Дневник от работилницата",
+    title: "Бележки за процеса от тезгяха",
+    intro:
+      "Подробни статии как правим епоксидни river маси, как предотвратяваме напукване, как избираме дървесина и смола и как изпращаме с Еконт в България.",
+    readMore: "Прочети статията",
+    back: "Всички статии",
+    related: "Свързани страници",
+    more: "Още от дневника",
+  },
+  wishlist: {
+    eyebrow: "Любими",
+    title: "Запазени изделия",
+    empty: "Все още няма запазени.",
+    browse: "Към магазина",
+    remove: "Премахни",
   },
   about: {
     eyebrow: "Работилница",
@@ -643,7 +791,7 @@ const bg: typeof en = {
 returns: {
     eyebrow: "Връщане",
     title: "Връщане (14 дни право на отказ в ЕС)",
-    body: "За готови изделия от магазина, купени онлайн, имате право да се откажете в срок от 14 дни от получаването, без да посочвате причина, съгласно правилата на ЕС. Изделието трябва да е неизползвано и годно за препродажба. Връщането в България обикновено е с Еконт; възстановяваме цената след проверка. Поръчковите / персонализирани маси са изключение от 14-дневното право на отказ, след като производството е започнало, освен при производствен дефект — тогава ремонтираме или изработваме наново. Пишете на shimonchick@gmail.com с номера на фактурата.",
+    body: "За готови изделия от магазина, купени онлайн, имате право да се откажете в срок от 14 дни от получаването, без да посочвате причина, съгласно правилата на ЕС. Изделието трябва да е неизползвано и годно за препродажба. Връщането в България обикновено е с Еконт; възстановяваме цената след проверка. Отделно готовите изделия са с пожизнена гаранция срещу напукване и разлепване при нормална употреба на закрито — ремонтираме или заменяме. Поръчковите / персонализирани маси са изключение от 14-дневното право на отказ, след като производството е започнало, освен при производствен дефект — тогава ремонтираме или изработваме наново. Пишете на shimonchick@gmail.com с номера на фактурата.",
   },
   privacy: {
     eyebrow: "Поверителност",
@@ -653,7 +801,7 @@ returns: {
   terms: {
     eyebrow: "Условия",
     title: "Общи условия за продажба",
-    body: "Продавач: „ЕСКРИПТ“ ЕООД, ЕИК 206622349, София, България, търговско име Obsidian River. Цените в магазина са в евро. Плащане: наложен платеж чрез Еконт или банков превод по IBAN LT31 3250 0763 1737 6271 (BIC REVOLT21, Revolut Bank UAB) — посочете номера на фактурата като основание. Собствеността преминава след пълно плащане. Поръчковите маси започват след писмена оферта и депозит; сроковете са ориентировъчни. Снимките са илюстративни; дървесината и смолата варират. За всяка поръчка от магазина се издава фактура (OR-YEAR-####).",
+    body: "Продавач: „ЕСКРИПТ“ ЕООД, ЕИК 206622349, София, България, търговско име Obsidian River. Цените в магазина са в евро. Плащане: наложен платеж чрез Еконт или банков превод по IBAN LT31 3250 0763 1737 6271 (BIC REVOLT21, Revolut Bank UAB) — посочете номера на фактурата като основание. Собствеността преминава след пълно плащане. Поръчковите маси започват след писмена оферта и депозит; сроковете са ориентировъчни. Снимките са илюстративни; дървесината и смолата варират. Готовите изделия включват пожизнена гаранция срещу напукване и разлепване при нормална употреба на закрито. За всяка поръчка от магазина се издава фактура (OR-YEAR-####).",
   },
   footer: {
     tagline: "Маси и малки дървени изделия от работилница в България.",

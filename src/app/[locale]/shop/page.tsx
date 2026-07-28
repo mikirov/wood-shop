@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ProductMedia } from "@/components/product-media";
+import { ShopProductCard } from "@/components/shop-product-card";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { listProducts } from "@/lib/products";
@@ -63,36 +63,12 @@ export default async function ShopPage({ params }: PageProps) {
 
       <div className="mx-auto mt-14 grid max-w-7xl gap-10 px-6 pb-24 md:grid-cols-3 md:px-10">
         {products.map((product) => (
-          <Link
+          <ShopProductCard
             key={product.slug}
-            href={`/${locale}/shop/${product.slug}`}
-            className="group cursor-pointer"
-          >
-            <div className="relative aspect-square overflow-hidden bg-surface">
-              <ProductMedia
-                src={product.heroImage}
-                alt={product.name}
-                fill
-                className="object-cover transition duration-700 group-hover:scale-[1.03]"
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-            </div>
-            <p className="mt-4 font-serif text-2xl text-foreground">
-              {product.name}
-            </p>
-            <p className="mt-2 text-sm text-muted">{product.tagline}</p>
-            <div className="mt-3 flex items-center justify-between gap-3">
-              <p className="text-xs tracking-[0.14em] text-accent uppercase">
-                {product.priceLabel}
-              </p>
-              <p className="text-xs tracking-[0.12em] text-muted uppercase">
-                {product.inStock ? product.leadTime : dictionary.product.soldOut}
-              </p>
-            </div>
-            <p className="mt-4 text-xs tracking-[0.16em] text-foreground uppercase group-hover:text-accent">
-              {s.buyNow} →
-            </p>
-          </Link>
+            locale={locale}
+            dictionary={dictionary}
+            product={product}
+          />
         ))}
       </div>
     </div>
